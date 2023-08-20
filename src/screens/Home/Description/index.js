@@ -16,9 +16,9 @@ const Description = ({ info }) => {
     <div className={styles.section}>
       <div className={cn('container', styles.container)}>
         <div className={styles.wrap}>
-          <div className={styles.stage}>{info?.metadata?.subtitle}</div>
-          <h1 className={cn('h1', styles.title)}>{info?.metadata?.title}</h1>
-          <div className={styles.text}>{info?.metadata?.description}</div>
+          <div className={styles.stage}>The new way to make memories</div>
+          <h1 className={cn('h1', styles.title)}>Capture your loved ones memories</h1>
+          <div className={styles.text}>Start capturing your moments by booking your photographer</div>
           <div className={styles.btns}>
             <button
               aria-hidden="true"
