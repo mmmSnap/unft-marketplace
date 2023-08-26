@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import cn from 'classnames'
 import AppLink from '../AppLink'
 import Group from './Group'
