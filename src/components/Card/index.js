@@ -4,6 +4,7 @@ import AppLink from '../AppLink'
 import styles from './Card.module.sass'
 import Icon from '../Icon'
 import Image from '../Image'
+import { cardConst } from './cardConst'
 
 const Card = ({ className, item }) => {
   const [visible, setVisible] = useState(false)
@@ -34,10 +35,10 @@ const Card = ({ className, item }) => {
         </div>
         <div className={styles.foot}>
           <div className={styles.status}>
-            <p>{item?.title}</p>
+            <p>{cardConst.name} : {item?.title}</p>
             <p className={styles.count}>
               {item?.metadata?.count > 0
-                ? `${item?.metadata?.count} Items`
+                ? `${cardConst.photCount} -${item?.metadata?.count} Items`
                 : 'Not Available'}
             </p>
           </div>
@@ -45,7 +46,7 @@ const Card = ({ className, item }) => {
             className={styles.bid}
             dangerouslySetInnerHTML={{ __html: item?.count }}
           />
-          <span className={styles.price}>{`$ ${item?.metadata?.price}`}</span>
+          <span className={styles.price}>{`${cardConst.rating} ${item?.metadata?.price}`}</span>
         </div>
       </AppLink>
     </div>

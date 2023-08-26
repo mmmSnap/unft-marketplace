@@ -9,7 +9,7 @@ import Modal from '../Modal'
 import OAuth from '../OAuth'
 import { useStateContext } from '../../utils/context/StateContext'
 import { getToken } from '../../utils/token'
-
+import { navbarMenuItems } from './consts/headerConst'
 import styles from './Header.module.sass'
 
 const Headers = ({ navigation }) => {
@@ -50,18 +50,18 @@ const Headers = ({ navigation }) => {
         <div className={cn('container', styles.container)} aria-hidden="true">
           <AppLink className={styles.logo} href="/">
             <Image
-              width={256}
-              height={120}
+              width={396}
+              height={140}
               objectFit='contain'
               className={styles.pic}
-              src={navigation['logo']?.imgix_url}
+              src={'https://cdn.discordapp.com/attachments/989739723151007764/1142453498508750868/mmojahid_mmm_text_logo_camera_mmm_text_at_bottom_white_backgrou_8759878f-0d1f-4ef2-a64c-8098313dbea8.png'}
               alt="Logo"
               priority
             />
           </AppLink>
           <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
             <nav className={styles.nav}>
-              {navigation['menu']?.map((x, index) => (
+              {navbarMenuItems.map((x, index) => (
                 <AppLink
                   aria-label="navigation"
                   className={styles.link}

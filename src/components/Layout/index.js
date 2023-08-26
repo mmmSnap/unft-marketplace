@@ -30,13 +30,27 @@ const Layout = ({ children, title, navigationPaths }) => {
   return (
     <>
       <Meta />
-      <PageMeta
+      {/* <PageMeta
         title={'uNFT Marketplace'}
         description={
           'uNFT Marketplace built with Cosmic CMS, Next.js, and the Stripe API'
         }
-      />
-      
+      /> */}
+      {/* <div className={styles.github}>
+        <p className={styles.source}>
+          The source code for this marketplace app is{' '}
+          <span className={styles.github}>
+            <a
+              className={styles.github}
+              href="https://github.com/cosmicjs/unft-marketplace"
+              target="_parent"
+            >
+              available on GitHub
+            </a>
+          </span>
+          .
+        </p>
+      </div> */}
       <div className={styles.page}>
         <Header navigation={navigationPaths || navigation} />
         <main className={styles.inner}>{children}</main>

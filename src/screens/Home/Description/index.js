@@ -2,10 +2,10 @@ import React from 'react'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-
+import { heroSectionInfo, commonButton } from './descriptionsConst'
 import styles from './Description.module.sass'
 
-const Description = ({ info }) => {
+const Description = ({}) => {
   const { push } = useRouter()
 
   const handleClick = href => {
@@ -16,23 +16,29 @@ const Description = ({ info }) => {
     <div className={styles.section}>
       <div className={cn('container', styles.container)}>
         <div className={styles.wrap}>
-          <div className={styles.stage}>The new way to make memories</div>
-          <h1 className={cn('h1', styles.title)}>Capture your loved ones memories</h1>
-          <div className={styles.text}>Start capturing your moments by booking your photographer</div>
+          <div className={styles.stage}>
+            {heroSectionInfo?.metadata?.subtitle}
+          </div>
+          <h1 className={cn('h1', styles.title)}>
+            {heroSectionInfo?.metadata?.title}
+          </h1>
+          <div className={styles.text}>
+            {heroSectionInfo?.metadata?.description}
+          </div>
           <div className={styles.btns}>
             <button
               aria-hidden="true"
               onClick={() => handleClick(`/search`)}
               className={cn('button-stroke', styles.button)}
             >
-              Discover more
+              {commonButton.explore}
             </button>
             <button
               aria-hidden="true"
               onClick={() => handleClick('/upload-details')}
               className={cn('button', styles.button)}
             >
-              Create item
+              {commonButton.getPhotoGrapher}
             </button>
           </div>
         </div>
@@ -42,9 +48,9 @@ const Description = ({ info }) => {
               quality={60}
               className={styles.preview}
               layout="fill"
-              src={info?.metadata?.image?.imgix_url}
+              src={heroSectionInfo?.metadata?.image?.imgix_url}
               placeholder="blur"
-              blurDataURL={`${info?.metadata?.image?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
+              blurDataURL={`${heroSectionInfo?.metadata?.image?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
               objectFit="cover"
               alt="Team"
               priority
