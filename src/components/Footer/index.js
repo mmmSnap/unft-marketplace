@@ -34,13 +34,13 @@ const Footers = ({ navigation }) => {
             <Group className={styles.group} item={navigation?.['menu']} />
           </div>
           <div className={styles.col}>
-            <AppLink href={`https://www.cosmicjs.com/features`}>
-              <p className={styles.category}>About Cosmic</p>
+            <AppLink href={`https://makemymemories.vercel.app/about`}>
+              <p className={styles.category}>About Make My Memories</p>
             </AppLink>
-            <AppLink href={`https://docs.cosmicjs.com/`}>
-              <p className={styles.text}>Documentation</p>
+            <AppLink href={`https://makemymemories.vercel.app/about`}>
+              <p className={styles.text}>Survey</p>
             </AppLink>
-            <AppLink href={`https://www.cosmicjs.com/contact`}>
+            <AppLink href={`https://makemymemories.vercel.app/contact`}>
               <p className={styles.text}>Contact Us</p>
             </AppLink>
             <SocialMedia className={styles.form} />

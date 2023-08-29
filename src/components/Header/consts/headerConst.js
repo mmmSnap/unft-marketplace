@@ -1,14 +1,14 @@
 export const navbarMenuItems = [
   {
-    title: 'Discover',
+    title: 'Book Photographer',
     url: '/search',
-  },
-  {
-    title: 'Create Item',
-    url: '/upload-details',
   },
   {
     title: 'About Us',
     url: '/about',
+  },
+  {
+    title: 'Contact Us',
+    url: '/upload-details',
   },
 ]
