@@ -11,6 +11,7 @@ import { useStateContext } from '../../utils/context/StateContext'
 import { getToken } from '../../utils/token'
 import { navbarMenuItems } from './consts/headerConst'
 import styles from './Header.module.sass'
+import {signIn} from "next-auth/react";
 
 const Headers = ({ navigation }) => {
   const [visibleNav, setVisibleNav] = useState(false)
@@ -92,9 +93,11 @@ const Headers = ({ navigation }) => {
               aria-label="login"
               aria-hidden="true"
               className={cn('button-small', styles.button, styles.login)}
-              onClick={() => setVisibleAuthModal(true)}
+              onClick={() => signIn({
+                callbackUrl: "/",
+              })}
             >
-              Login
+              Login1
             </button>
           )}
           <button

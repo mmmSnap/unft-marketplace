@@ -2,13 +2,16 @@ import { Toaster } from 'react-hot-toast'
 import { StateContext } from '../utils/context/StateContext'
 
 import '../styles/app.sass'
+import {SessionProvider} from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: {session, ...pageProps} }) {
   return (
-    <StateContext>
-      <Toaster />
-      <Component {...pageProps} />
-    </StateContext>
+      <SessionProvider session={session}>
+          <StateContext>
+              <Toaster />
+              <Component {...pageProps} />
+          </StateContext>
+      </SessionProvider>
   )
 }
 
