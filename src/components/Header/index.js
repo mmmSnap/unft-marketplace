@@ -11,7 +11,7 @@ import { useStateContext } from '../../utils/context/StateContext'
 import { getToken } from '../../utils/token'
 import { navbarMenuItems } from './consts/headerConst'
 import styles from './Header.module.sass'
-import {signIn} from "next-auth/react";
+import {signIn, signOut, useSession} from "next-auth/react";
 
 const Headers = ({ navigation }) => {
   const [visibleNav, setVisibleNav] = useState(false)
@@ -44,6 +44,8 @@ const Headers = ({ navigation }) => {
       isMounted = false
     }
   }, [cosmicUser, setCosmicUser])
+
+  const { data: session } = useSession();
 
   return (
     <>
@@ -86,19 +88,42 @@ const Headers = ({ navigation }) => {
             <Icon name="search" size="20" />
             Search
           </AppLink>
-          {cosmicUser?.['id'] ? (
-            <User className={styles.user} user={cosmicUser} />
+          {/*{cosmicUser?.['id'] ? (*/}
+          {/*    <User className={styles.user} user={cosmicUser} />*/}
+          {/*) : (*/}
+          {/*    <button*/}
+          {/*        aria-label="login"*/}
+          {/*        aria-hidden="true"*/}
+          {/*        className={cn('button-small', styles.button, styles.login)}*/}
+          {/*        onClick={() => signIn({*/}
+          {/*          callbackUrl: "/",*/}
+          {/*        })}*/}
+          {/*    >*/}
+          {/*      Login*/}
+          {/*    </button>*/}
+          {/*)}*/}
+          {session ? (
+              <button
+                  aria-label="login"
+                  aria-hidden="true"
+                  className={cn('button-small', styles.button, styles.login)}
+                  onClick={() => signOut({
+                    callbackUrl: "/",
+                  })}
+              >
+                Logout
+              </button>
           ) : (
-            <button
-              aria-label="login"
-              aria-hidden="true"
-              className={cn('button-small', styles.button, styles.login)}
-              onClick={() => signIn({
-                callbackUrl: "/",
-              })}
-            >
-              Login1
-            </button>
+              <button
+                  aria-label="login"
+                  aria-hidden="true"
+                  className={cn('button-small', styles.button, styles.login)}
+                  onClick={() => signIn({
+                    callbackUrl: "/",
+                  })}
+              >
+                Login
+              </button>
           )}
           <button
             aria-label="user-information"
