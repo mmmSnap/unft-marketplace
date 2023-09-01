@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import cn from 'classnames'
 import AppLink from '../AppLink'
 import Icon from '../Icon'
 import Image from 'next/image'
-import User from './User'
 import Theme from '../Theme'
 import Modal from '../Modal'
 import OAuth from '../OAuth'
-import { useStateContext } from '../../utils/context/StateContext'
-import { getToken } from '../../utils/token'
-import { navbarMenuItems } from './consts/headerConst'
+import {useStateContext} from '../../utils/context/StateContext'
+import {getToken} from '../../utils/token'
+import {navbarMenuItems} from './consts/headerConst'
 import styles from './Header.module.sass'
 import {signIn, signOut, useSession} from "next-auth/react";
 
-const Headers = ({ navigation }) => {
+const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false)
   const [visibleAuthModal, setVisibleAuthModal] = useState(false)
 
