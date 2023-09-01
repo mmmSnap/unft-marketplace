@@ -56,17 +56,17 @@ const Home = ({
     <Layout navigationPaths={navigationItems[0]?.metadata}>
       <Description info={chooseBySlug(landing, 'marketing')} />
       <HotBid classSection="section" info={categoriesGroup['groups'][0]} />
-      <Categories
-        info={categoriesGroup['groups']}
-        type={categoriesGroup['type']}
-      />
-      <Selection info={categoriesGroup['groups']} type={categoryTypes} />
-      <Intro info={chooseBySlug(landing, 'introduction')} />
-      <Partners info={reviews} />
       <Discover
         info={categoriesGroup['groups']}
         type={categoriesGroup['type']}
       />
+      <Categories
+        info={categoriesGroup['groups']}
+        type={categoriesGroup['type']}
+      />
+      <Intro info={chooseBySlug(landing, 'introduction')} />
+      
+      <Partners info={reviews} />
     </Layout>
   )
 }
