@@ -20,4 +20,5 @@ const handleQueryParams = ({ color, min, max, category, search }) => {
   return queryParam
 }
 
+console.log('checking main commit ')
 export default handleQueryParams
