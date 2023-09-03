@@ -82,8 +82,8 @@ export default async (req, res) => {
     }
     return NextAuth({
         providers: providers,
-        // pages: {
-        //     signIn: '/auth/signin',
-        // }
+        pages: {
+            signIn: '/auth/login',
+        }
     })(req, res);
 };
