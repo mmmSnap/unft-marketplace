@@ -2,6 +2,7 @@ import React from 'react';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import Typography from '../../components/Typography/Typography';
 import BlockButton from '../../components/BlockButton/BlockButton';
+import InputElement from '../../components/InputElement/InputElement';
 import Hr from '../../components/hr/Hr'
 import style from './index.module.sass'
 import {LoginTypeRadioOption}  from './const'
@@ -36,14 +37,21 @@ const LoginComponent = () => {
                    
                 </div>
                 <div style={{width:"80%",margin:"10px 0px"}}>
-                <BlockButton    >
+                <BlockButton   varient='outlined' >
                     Contine with google
                 </BlockButton>
                </div>
                <Hr>
                   OR
                </Hr>
-
+               <div style={{width:"80%",margin:"20px 0px"}}>
+                <InputElement  />
+               </div>
+               <div style={{width:"80%",margin:"20px 0px"}}>
+                <BlockButton    >
+                    Submit
+                </BlockButton>
+               </div>
             </div>
         </div>
     )
