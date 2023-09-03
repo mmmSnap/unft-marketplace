@@ -4,6 +4,7 @@ import Typography from '../../components/Typography/Typography';
 import BlockButton from '../../components/BlockButton/BlockButton';
 import InputElement from '../../components/InputElement/InputElement';
 import IconGooglePlus from '../../svgIcons/IconGooglePlus';
+import IconAvatar from '../../svgIcons/IconAvatar';
 import Hr from '../../components/hr/Hr'
 import style from './index.module.sass'
 import { LoginTypeRadioOption } from './const'
@@ -18,10 +19,10 @@ const LoginComponent = () => {
     return (
         <div className={style.container}>
             <div className={style.childDiv}>
-                <div>
-                   
+                <div style={{ marginTop: "15px" }}>
+                   <IconAvatar  />
                 </div>
-                <div style={{ margin: "10px 0px" }}>
+                <div style={{ marginTop: "10px 0px" }}>
                     <Typography component="h1" variant="h5" >
                         Sign in or Sign up
                     </Typography>
@@ -43,7 +44,7 @@ const LoginComponent = () => {
                 <div style={{ width: "80%", margin: "10px 0px" }}>
                 
                     <BlockButton varient='outlined' >
-                     <IconGooglePlus  />Contine with google
+                     <IconGooglePlus  /> Contine with google
                     </BlockButton>
                 </div>
                 <Hr>
