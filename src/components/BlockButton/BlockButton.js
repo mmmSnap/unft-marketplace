@@ -14,11 +14,10 @@ const classNamevalue = {
 }
 
 
-const BlockButton = ({ children, varient = "contained", color = "primary" }) => {
+const BlockButton = ({ children, varient = "contained", color = "primary",...rest }) => {
 
-    console.log(cn(style.block, classNamevalue[varient]?.[color], style['blank']))
     return (
-        <button className={cn(style.block, style[classNamevalue[varient]?.[color] || 'blank'])} >
+        <button {...rest} className={cn(style.block, style[classNamevalue[varient]?.[color] || 'blank'])} >
             {children}
         </button>
     )

@@ -1,10 +1,14 @@
 import React from 'react'
-import { getDataByCategory, getAllDataByType } from '../../lib/cosmic'
+import axios from 'axios'
+import {getCsrfToken, signIn} from "next-auth/react"
+import {getServerSession} from "next-auth/next"
+import {authOptions} from "../api/auth/[...nextauth]";
+import {  getAllDataByType } from '../../lib/cosmic'
 
 import LoginComponent from '../../domain/login/index'
 import Layout from '../../components/Layout';
 
-const LoginPage = ({navigationItems}) => {
+const LoginPage = ({navigationItems,...rest}) => {
 
     const [selectedOption, setSelectedOption] = React.useState('Option 1');
 
@@ -14,17 +18,22 @@ const LoginPage = ({navigationItems}) => {
 
     return (
         <Layout navigationPaths={navigationItems[0]?.metadata}>
-            <LoginComponent />
+            <LoginComponent {...rest} />
         </Layout>
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     const navigationItems = (await getAllDataByType('navigation')) || []
     const landing = (await getAllDataByType('landings')) || []
-
+    const session = await getServerSession(context.req, context.res, authOptions);
+    const csrfToken = await getCsrfToken(context)
+    const providers = JSON.stringify((await axios.get(`${process.env.BASE_URL}api/auth/providers`, {headers: context.req.headers})).data);
+    if (session) {
+        return {redirect: {destination: "/"}};
+    }
     return {
-        props: { navigationItems, landing },
+        props: { providers: providers ?? [], csrfToken: csrfToken ?? "",navigationItems, landing },
     }
 }
 

@@ -20,5 +20,4 @@ const handleQueryParams = ({ color, min, max, category, search }) => {
   return queryParam
 }
 
-console.log('checking main commit odl test')
 export default handleQueryParams
