@@ -206,6 +206,12 @@ const Discover = ({ info, type }) => {
                   required
                 />
               </div>
+              <Dropdown
+              className={styles.dropdown}
+              value={option}
+              setValue={getDataByFilterOptions}
+              options={OPTIONS}
+            />
             </div>
           </div>
         </div>
