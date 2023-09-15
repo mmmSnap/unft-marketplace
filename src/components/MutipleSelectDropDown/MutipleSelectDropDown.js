@@ -1,49 +1,71 @@
-import React, { useState } from 'react';
-import styles from './MutipleSelectDropDown.module.sass';
+import * as React from 'react';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
 
-const MutipleSelectDropDown = ({ options }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
 
-  const handleCheckboxChange = (e) => {
-    const value = e.target.value;
-    setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(value)) {
-        return prevSelectedItems.filter((item) => item !== value);
-      } else {
-        return [...prevSelectedItems, value];
-      }
-    });
+export default function MutipleSelectDropDown() {
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
   };
 
   return (
-    <div className={styles.dropdown}>
-      <button className={styles.dropdownToggle} onClick={toggleDropdown}>
-        {selectedItems.length > 0
-          ? selectedItems.join(', ')
-          : 'Select Items'}
-      </button>
-      {isOpen && (
-        <div className={styles.dropdownContent}>
-          {options.map((option) => (
-            <label key={option} className={styles.label}>
-              <input
-                type="checkbox"
-                value={option}
-                onChange={handleCheckboxChange}
-                checked={selectedItems.includes(option)}
-              />
-              {option}
-            </label>
+    <div>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={personName}
+          onChange={handleChange}
+          input={<OutlinedInput label="Tag" />}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={personName.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
           ))}
-        </div>
-      )}
+        </Select>
+      </FormControl>
     </div>
   );
-};
-
-export default MutipleSelectDropDown;
+}

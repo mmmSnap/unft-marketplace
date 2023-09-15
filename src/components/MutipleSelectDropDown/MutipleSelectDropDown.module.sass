@@ -1,30 +1,26 @@
-/* MultiSelectDropdown.module.scss */
-.dropdown 
-    position: relative
-    display: inline-block
-
-.dropdownToggle 
-    background-color: #f1f1f1
-    border: 1px solid #ccc
-    padding: 10px
-    cursor: pointer
-
-
-.dropdownContent 
-    display: none
-    position: absolute
-    background-color: #fff
-    border: 1px solid #ccc
-    max-height: 150px
-    overflow-y: auto
-
-
-.label 
-    display: block
-    padding: 5px 10px
-    cursor: pointer
-
-
-.label:hover 
-    background-color: #e0e0e0
-
+.multi-select-dropdown 
+	position: relative 
+	width: 200px 
+	&.show-options 
+		.dropdown-options 
+			display: block 
+.selected-options 
+	border: 1px solid #ccc 
+	padding: 10px 
+	cursor: pointer 
+	ul 
+		list-style: none 
+		padding: 0 
+.dropdown-options 
+	display: none 
+	position: absolute 
+	top: 100% 
+	left: 0 
+	background-color: #fff 
+	border: 1px solid #ccc 
+	max-height: 150px 
+	overflow-y: auto 
+	padding: 10px 
+	label 
+		display: block 
+		margin-bottom: 5px 

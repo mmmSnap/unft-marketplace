@@ -8,7 +8,6 @@ import IconAvatar from '../../svgIcons/IconAvatar';
 import Hr from '../../components/hr/Hr'
 import style from './index.module.sass'
 import { LoginTypeRadioOption } from './const'
-
 function GoogleSignIn(provider, csrfToken, callbackUrl) {
     return (
         <form action={provider.signinUrl} method="POST" key={provider?.id || "google"}>
