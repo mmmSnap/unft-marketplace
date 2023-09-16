@@ -17,12 +17,11 @@ export default function SelectValueOnChange(props) {
       name={fieldName}
       rules={{
         required: {
-          value: true,
+          value: false,
           message: "This fields is required",
         },
       }}
       render={({ field, fieldState: { error } }) => {
-        console.log(field)
         return (
           <Autocomplete
             multiple

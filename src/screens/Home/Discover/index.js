@@ -11,6 +11,7 @@ import Card from '../../../components/Card'
 import Dropdown from '../../../components/Dropdown'
 import priceRange from '../../../utils/constants/priceRange'
 import { OPTIONS } from '../../../utils/constants/appConstants'
+import MuiFilter from '../../../components/MuiComponent/MuiFilter/MuiFilter'
 
 const ChipItem = [
   {
@@ -203,34 +204,8 @@ const Discover = ({ info, type }) => {
         <div className={cn(styles.filters, { [styles.active]: visible })}>
           <div className={styles.sorting}>
             <div className={styles.cell}>
-              <div className={styles.label}>Price range</div>
-              <div className={styles.prices}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={min}
-                  onChange={handleChange}
-                  name="min"
-                  placeholder="MIN"
-                  required
-                />
-                <p className={styles.separator}>to</p>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={max}
-                  onChange={handleChange}
-                  name="max"
-                  placeholder="MAX"
-                  required
-                />
-              </div>
-              <Dropdown
-                className={styles.dropdown}
-                value={option}
-                setValue={getDataByFilterOptions}
-                options={OPTIONS}
-              />
+            <MuiFilter   />
+            
             </div>
           </div>
         </div>

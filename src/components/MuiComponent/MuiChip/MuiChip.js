@@ -6,7 +6,7 @@ const MuiChip = ({ chipList, setChipList }) => {
 
     return (
         chipList.map((chip) => {
-            return <Chip label={chip.label} color={chip.isSelected ? 'primary' : 'default'}
+            return <Chip key={chip.id} label={chip.label} color={chip.isSelected ? 'primary' : 'default'}
                  sx={{margin:"0px 10px",fontSize:"16px"}}
                  size={'string'}
                 clickable

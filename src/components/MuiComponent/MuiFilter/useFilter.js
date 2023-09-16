@@ -57,8 +57,8 @@ const useFilter = (data) => {
       fieldName: GENDER,
       control,
       options: Gender,
-      isError: !!genderError,
-      errorMessage: genderError,
+    //   isError: !!genderError,
+    //   errorMessage: genderError,
     },
     [SKILLS]: {
       // required: true,
@@ -66,8 +66,7 @@ const useFilter = (data) => {
       label: "skills",
       control,
       options: Skills,
-      isError: !!genderError,
-      errorMessage: genderError,
+   
     },
     [EXPERTISE]: {
       // required: true,
