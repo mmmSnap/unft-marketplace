@@ -4,13 +4,32 @@ import { useRouter } from 'next/router'
 import useFetchData from '../../../utils/hooks/useFetchData'
 import useDebounce from '../../../utils/hooks/useDebounce'
 import handleQueryParams from '../../../utils/queryParams'
-
+import MuiChip from '../../../components/MuiChip/MuiChip'
 import Slider from 'react-slick'
 import Icon from '../../../components/Icon'
 import Card from '../../../components/Card'
 import Dropdown from '../../../components/Dropdown'
 import priceRange from '../../../utils/constants/priceRange'
 import { OPTIONS } from '../../../utils/constants/appConstants'
+
+const ChipItem = [
+  {
+    label: "Wedding",
+    id: 1,
+    isSelected: false
+  },
+  {
+    label: "E commerce",
+    id: 2,
+    isSelected: false
+  },
+  {
+    label: "Newborn",
+    id: 3,
+    isSelected: false
+  },
+
+]
 
 import styles from './Discover.module.sass'
 
@@ -52,6 +71,21 @@ const settings = {
 const Discover = ({ info, type }) => {
   const { push } = useRouter()
   const { data: filterResult, fetchData } = useFetchData([])
+  const [chipList, setChipList] = React.useState(ChipItem)
+
+  const handleSelectChip = (id) => {
+    console.log('checklist',)
+    const updatedList = chipList.map((chip) => {
+      if (chip.id === id) {
+        return {
+          ...chip,
+          isSelected: !chip.isSelected
+        }
+      }
+      return chip
+    })
+    setChipList([...updatedList])
+  }
 
   const [activeIndex, setActiveIndex] = useState(
     type ? Object.entries(type)[0]?.[0] : ''
@@ -149,26 +183,11 @@ const Discover = ({ info, type }) => {
         </div>
         <div className={styles.top}>
           <div className={styles.dropdown}>
-            <Dropdown
-              className={styles.dropdown}
-              value={option}
-              setValue={getDataByFilterOptions}
-              options={OPTIONS}
-            />
-          </div>
+           
+         
           <div className={styles.nav}>
-            {type &&
-              Object.entries(type)?.map((item, index) => (
-                <button
-                  className={cn(styles.link, {
-                    [styles.active]: item[0] === activeIndex,
-                  })}
-                  onClick={() => handleCategoryChange(item[0])}
-                  key={index}
-                >
-                  {item[1]}
-                </button>
-              ))}
+            <MuiChip  setChipList={handleSelectChip} chipList={chipList}/>
+          </div>
           </div>
           <button
             className={cn(styles.filter, { [styles.active]: visible })}
@@ -207,11 +226,11 @@ const Discover = ({ info, type }) => {
                 />
               </div>
               <Dropdown
-              className={styles.dropdown}
-              value={option}
-              setValue={getDataByFilterOptions}
-              options={OPTIONS}
-            />
+                className={styles.dropdown}
+                value={option}
+                setValue={getDataByFilterOptions}
+                options={OPTIONS}
+              />
             </div>
           </div>
         </div>
