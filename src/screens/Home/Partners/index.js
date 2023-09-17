@@ -15,7 +15,7 @@ const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
 const settings = {
   infinite: false,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow: 4,
   slidesToScroll: 1,
   adaptiveHeight: true,
   nextArrow: (
@@ -58,7 +58,7 @@ const Partners = ({ info }) => {
         <div className={cn('container', styles.container)}>
           <div className={styles.top}>
             <div className={styles.box}>
-              <div className={styles.stage}>Join Us!</div>
+              <div className={styles.stage}>Happy Customers!</div>
               <h2 className={cn('h3', styles.title)}>Reviews</h2>
             </div>
           </div>
@@ -71,7 +71,7 @@ const Partners = ({ info }) => {
                       <div className={styles.avatar}>
                         <Image
                           size={{ width: '86px', height: '86px' }}
-                          src={x?.metadata?.avatar?.imgix_url}
+                          src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=996&t=st=1694971127~exp=1694971727~hmac=4b9d7f6068e77449d6637c3bb29c3ffc0a030a387e1f3821eea9293ec03c3711"
                           alt="Avatar"
                           objectFit="cover"
                         />
