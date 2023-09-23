@@ -5,15 +5,17 @@ import { useStateContext } from '../utils/context/StateContext'
 import useDebounce from '../utils/hooks/useDebounce'
 import useFetchData from '../utils/hooks/useFetchData'
 import { getAllDataByType, getDataByCategory } from '../lib/cosmic'
-
+import MuiSearchComponent from '../components/MuiComponent/MuiSearchComponent/MuiSearchComponent'
+import MuiChip from '../components/MuiComponent/MuiChip/MuiChip'
 import Layout from '../components/Layout'
-import Icon from '../components/Icon'
+import Divider from '@mui/material/Divider';
 import Card from '../components/Card'
 import Dropdown from '../components/Dropdown'
 import priceRange from '../utils/constants/priceRange'
 import handleQueryParams from '../utils/queryParams'
 import { OPTIONS } from '../utils/constants/appConstants'
-
+import MuiVerticleFilter from '../components/MuiComponent/MuiFilter/MuiVerticleFilter'
+import { ChipItem } from '../GlobalConst/ChipConst'
 import styles from '../styles/pages/Search.module.sass'
 import { PageMeta } from '../components/Meta'
 
@@ -26,9 +28,23 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   )
 
   const categoriesTypeData = categoriesGroup['type'] || categories['type']
-
   const [search, setSearch] = useState(query['search'] || '')
   const debouncedSearchTerm = useDebounce(search, 600)
+
+  const [chipList, setChipList] = React.useState(ChipItem)
+
+  const handleSelectChip = (id) => {
+    const updatedList = chipList.map((chip) => {
+      if (chip.id === id) {
+        return {
+          ...chip,
+          isSelected: !chip.isSelected
+        }
+      }
+      return chip
+    })
+    setChipList([...updatedList])
+  }
 
   const [{ min, max }, setRangeValues] = useState(
     query['min'] || query['max']
@@ -154,39 +170,23 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
               <div className={styles.top}>
                 <div className={styles.title}>Search</div>
               </div>
+             
               <div className={styles.form}>
                 <div className={styles.label}>Search keyword</div>
-                <form
-                  className={styles.search}
-                  action=""
-                  onSubmit={handleSubmit}
-                >
-                  <input
-                    className={styles.input}
-                    type="text"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                    name="search"
-                    placeholder="Search..."
-                    required
-                  />
-                  <button className={styles.result}>
-                    <Icon name="search" size="16" />
-                  </button>
-                </form>
+                <MuiSearchComponent  />
               </div>
+              <div className={styles.label}>Filter</div>
+              <Divider color="primary" textAlign='left' />
+              
+            
               <div className={styles.sorting}>
+               
                 <div className={styles.dropdown}>
-                  <div className={styles.label}>Select color</div>
-                  <Dropdown
-                    className={styles.dropdown}
-                    value={option}
-                    setValue={getDataByFilterOptions}
-                    options={OPTIONS}
-                  />
+                <MuiVerticleFilter />
+                
                 </div>
               </div>
-              <div className={styles.range}>
+              {/* <div className={styles.range}>
                 <div className={styles.label}>Price range</div>
                 <div className={styles.prices}>
                   <input
@@ -209,11 +209,13 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                     required
                   />
                 </div>
-              </div>
+              </div> */}
+
             </div>
             <div className={styles.wrapper}>
               <div className={styles.nav}>
-                <button
+              <MuiChip  setChipList={handleSelectChip} chipList={chipList}/>
+                {/* <button
                   className={cn(styles.link, {
                     [styles.active]: '' === activeIndex,
                   })}
@@ -232,7 +234,8 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                     >
                       {item[1]}
                     </button>
-                  ))}
+                  ))} */}
+
               </div>
               <div className={styles.list}>
                 {searchResult?.length ? (

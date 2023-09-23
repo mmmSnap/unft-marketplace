@@ -24,7 +24,7 @@ const ThemSetup = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    borderRadius: '24px',
+                    borderRadius: '12px',
                     textAlign: "center"
                 }
             }

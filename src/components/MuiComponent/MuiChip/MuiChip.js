@@ -11,7 +11,7 @@ const MuiChip = ({ chipList, setChipList }) => {
                  size={'string'}
                 clickable
                 onClick={() => setChipList(chip.id)}
-                icon={chip.isSelected && (<CheckIcon />)}
+                icon={chip.isSelected?(<CheckIcon />):('')}
             />
         })
     )

@@ -15,6 +15,11 @@ import MuiFilter from '../../../components/MuiComponent/MuiFilter/MuiFilter'
 
 const ChipItem = [
   {
+    label: "All",
+    id: 1,
+    isSelected: true
+  },
+  {
     label: "Wedding",
     id: 1,
     isSelected: false
@@ -75,7 +80,6 @@ const Discover = ({ info, type }) => {
   const [chipList, setChipList] = React.useState(ChipItem)
 
   const handleSelectChip = (id) => {
-    console.log('checklist',)
     const updatedList = chipList.map((chip) => {
       if (chip.id === id) {
         return {

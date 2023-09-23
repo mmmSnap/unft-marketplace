@@ -11,7 +11,7 @@ import {
     RATING,
 } from "../../../GlobalConst/consts";
 
-const MuiFilter = ({ filterData }) => {
+const MuiVerticleFilter = ({ filterData }) => {
     const [show, setShow] = React.useState(false);
     let data = {
         [GENDER]: "",
@@ -25,17 +25,17 @@ const MuiFilter = ({ filterData }) => {
 
         <Grid
             container
-            spacing={1}
+            
             sx={{
                 maxWidth: "100%",
-                margin: "20px 0px",
+                margin: "10px 0px",
                 display:"flex",
                 flexDirection: "column"
             }}
         >
-            <Divider />
+        
             <>
-                <Grid item md={12}>
+                <Grid item md={12} mb="10px">
                     <SelectValueOnChange
                         size={"small"}
                         label="Gender"
@@ -44,7 +44,7 @@ const MuiFilter = ({ filterData }) => {
                         filterData={filterData}
                     />
                 </Grid>
-                <Grid item md={3}>
+                <Grid item md={12} mb="10px">
                     <SelectValueOnChange
                         size={"small"}
                         label="Expertise"
@@ -54,16 +54,7 @@ const MuiFilter = ({ filterData }) => {
                     />
                 </Grid>
 
-                {/* <Grid item md={2}>
-              <SelectValueOnChange
-                size={"small"}
-                label="Expertise"
-                {...fieldsForm[WITH_OR_WITOUT_STUDIO]}
-                defaultValue={data[GENDER]}
-                filterData={filterData}
-              />
-            </Grid> */}
-                <Grid item md={3}>
+                <Grid item md={12} mb="10px">
                     <SelectValueOnChange
                         size={"small"}
                         label="With or Without Studio"
@@ -78,4 +69,4 @@ const MuiFilter = ({ filterData }) => {
     );
 };
 
-export default MuiFilter;
+export default MuiVerticleFilter;
