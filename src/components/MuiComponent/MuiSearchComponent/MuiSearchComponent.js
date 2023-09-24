@@ -8,23 +8,25 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 
-export const MuiSearchComponent = () => {
+export const MuiSearchComponent = ({ search, setSearch }) => {
 
 
     return (
         <Paper
             component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center',}}
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', }}
         >
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
                 inputProps={{ 'aria-label': 'Search' }}
             />
             <IconButton type="button" sx={{ p: '10px' }} color='primary' aria-label="search">
                 <SearchIcon />
             </IconButton>
-            
+
         </Paper>
     )
 }

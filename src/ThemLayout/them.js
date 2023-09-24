@@ -29,6 +29,15 @@ const ThemSetup = createTheme({
                 }
             }
         },
+       
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    borderRadius: '12px',
+                    textAlign: "center"
+                }
+            }
+        },
         MuiContainer: {
             styleOverrides: {
                 root: {

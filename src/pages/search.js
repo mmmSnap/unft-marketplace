@@ -28,7 +28,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   )
 
   const categoriesTypeData = categoriesGroup['type'] || categories['type']
-  const [search, setSearch] = useState(query['search'] || '')
+  const [search, setSearch] = useState('')
   const debouncedSearchTerm = useDebounce(search, 600)
 
   const [chipList, setChipList] = React.useState(ChipItem)
@@ -173,7 +173,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
              
               <div className={styles.form}>
                 <div className={styles.label}>Search keyword</div>
-                <MuiSearchComponent  />
+                <MuiSearchComponent search={search} setSearch={setSearch} />
               </div>
               <div className={styles.label}>Filter</div>
               <Divider color="primary" textAlign='left' />
