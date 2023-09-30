@@ -18,10 +18,21 @@ import MuiVerticleFilter from '../components/MuiComponent/MuiFilter/MuiVerticleF
 import { ChipItem } from '../GlobalConst/ChipConst'
 import styles from '../styles/pages/Search.module.sass'
 import { PageMeta } from '../components/Meta'
+import { axionInstace } from '../globalServices/axionInstace'
+import {
+  FilterConstData,
+  EXPERTISE,
+  GENDER,
+  PRICE,
+  SKILLS,
+} from "../GlobalConst/consts";
+
+import searchData from '../GlobalConst/search.json'
 
 const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
   const { categories } = useStateContext()
+  const [updateList, setUpdatedList] = React.useState(JSON.parse(JSON.stringify(searchData)));
 
   const { data: searchResult, fetchData } = useFetchData(
     categoryData?.length ? categoryData : []
@@ -30,6 +41,13 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const categoriesTypeData = categoriesGroup['type'] || categories['type']
   const [search, setSearch] = useState('')
   const debouncedSearchTerm = useDebounce(search, 600)
+
+  function intersect(a, b) {
+    return !!a.filter(Set.prototype.has, new Set(b)).length;
+  }
+  const valeExtractFromObject = (objectArray) => {
+    return objectArray.map(({ label }) => label);
+  };
 
   const [chipList, setChipList] = React.useState(ChipItem)
 
@@ -65,6 +83,66 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
       [name]: value,
     }))
   }
+  const filterData = (listData, filterType) => {
+    const gender = listData;
+    const localData = JSON.parse(JSON.stringify(searchData));
+    let filterList = [];
+    switch (filterType) {
+      case GENDER:
+        filterList = localData.filter((item) => {
+          FilterConstData.gender = valeExtractFromObject(listData);
+
+          return intersect([item.gender], FilterConstData.gender);
+        });
+        break;
+      case PRICE:
+        filterList = localData.filter((item) => {
+          FilterConstData.price = valeExtractFromObject(listData);
+
+          return intersect([item.price?.label || ""], FilterConstData.price);
+        });
+        break;
+
+      case EXPERTISE:
+        filterList = localData.filter((item) => {
+          FilterConstData.expertise = valeExtractFromObject(listData);
+
+          return intersect(item.expertise, FilterConstData.expertise);
+        });
+        break;
+      case SKILLS:
+        
+         filterList = localData.filter((item) => {
+          FilterConstData.skills = valeExtractFromObject(listData);
+          return intersect(item.skills,  FilterConstData.skills );
+        });
+        console.log('filterList',filterList)
+        break;
+      default:
+    }
+    if (
+      FilterConstData.gender.length ||
+      FilterConstData.skills.length ||
+      FilterConstData.expertise.length ||
+      FilterConstData.price.length
+    ) {
+      setUpdatedList([...filterList]);
+    } else {
+      setUpdatedList([...localData]);
+    }
+  };
+
+  React.useEffect(() => {
+
+    axionInstace.get('/search?query=A')
+      .then((result) => {
+        console.log("result,", result)
+
+      }).catch((e) => {
+        console.log(e)
+      })
+
+  }, [])
 
   const handleFilterDataByParams = useCallback(
     async ({
@@ -170,20 +248,20 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
               <div className={styles.top}>
                 <div className={styles.title}>Search</div>
               </div>
-             
+
               <div className={styles.form}>
                 <div className={styles.label}>Search keyword</div>
                 <MuiSearchComponent search={search} setSearch={setSearch} />
               </div>
               <div className={styles.label}>Filter</div>
               <Divider color="primary" textAlign='left' />
-              
-            
+
+
               <div className={styles.sorting}>
-               
+
                 <div className={styles.dropdown}>
-                <MuiVerticleFilter />
-                
+                  <MuiVerticleFilter filterData={filterData} />
+
                 </div>
               </div>
               {/* <div className={styles.range}>
@@ -214,7 +292,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
             </div>
             <div className={styles.wrapper}>
               <div className={styles.nav}>
-              <MuiChip  setChipList={handleSelectChip} chipList={chipList}/>
+                <MuiChip setChipList={handleSelectChip} chipList={chipList} />
                 {/* <button
                   className={cn(styles.link, {
                     [styles.active]: '' === activeIndex,
@@ -238,8 +316,8 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
               </div>
               <div className={styles.list}>
-                {searchResult?.length ? (
-                  searchResult?.map((x, index) => (
+                {updateList?.length ? (
+                  updateList?.map((x, index) => (
                     <Card className={styles.card} item={x} key={index} />
                   ))
                 ) : (

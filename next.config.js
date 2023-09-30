@@ -2,8 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
-    domains: ['imgix.cosmicjs.com', 'cosmic-s3.imgix.net','cdn.discordapp.com','img.freepik.com'],
+   
+    domains: ['img.freepik.com','images.unsplash.com', 'drive.google.com', 'source.unsplash.com',"imgix.cosmicjs.com", "lh5.googleusercontent.com",'cdn.discordapp.com','streetviewpixels-pa.googleapis.com'],
+ 
   },
 }
 

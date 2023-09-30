@@ -38,3 +38,13 @@ export const WITH_OR_WITOUT_STUDIO = "with-or-without-studio"
 export const RATING = "Rating"
 export const START_DATE = "start-date";
 export const END_DATE = "end-date";
+
+
+export const FilterConstData = {
+    gender:[],
+    skills:[],
+    expertise:[],
+    withOrWithoutStudio:[],
+    price:[],
+    rating:[]
+}

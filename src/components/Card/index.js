@@ -15,12 +15,12 @@ const Card = ({ className, item }) => {
         <div className={styles.preview}>
           <Image
             size={{ width: '100%', height: '360px' }}
-            src={item?.metadata?.image?.imgix_url}
+            src={item?.images?.[0]??'https://cdn.discordapp.com/attachments/989739723151007764/1142453498508750868/mmojahid_mmm_text_logo_camera_mmm_text_at_bottom_white_backgrou_8759878f-0d1f-4ef2-a64c-8098313dbea8.png'}
             alt="Card"
             objectFit="cover"
           />
           <div className={styles.control}>
-            <div className={styles.category}>{item?.title}</div>
+            <div className={styles.category}>{item?.name}</div>
             <button
               className={cn(styles.favorite, { [styles.active]: visible })}
               onClick={() => setVisible(!visible)}
@@ -44,9 +44,9 @@ const Card = ({ className, item }) => {
           </div>
           <div
             className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item?.count }}
+            dangerouslySetInnerHTML={{ __html: item?.rating_count??0 }}
           />
-          <span className={styles.price}>{`${cardConst.rating} ${item?.metadata?.price}`}</span>
+          <span className={styles.price}>{`${cardConst.rating} ${item?.rating}`}</span>
         </div>
       </AppLink>
     </div>
