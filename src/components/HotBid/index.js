@@ -57,11 +57,11 @@ const Hot = ({ classSection, info }) => {
   const getPhotGrapherDeatisl = () => {
     axionInstace.get(`/search?query=${'A'}`)
       .then((result) => {
-        console.log("result,", result.data)
+       
         setPhotoGrapherList([...result.data.items])
         setLoading(false)
       }).catch((e) => {
-        console.log(e)
+        setLoading(false)
       })
   }
 

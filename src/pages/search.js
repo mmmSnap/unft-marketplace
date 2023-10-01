@@ -117,7 +117,6 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
           FilterConstData.skills = valeExtractFromObject(listData);
           return intersect(item.skills, FilterConstData.skills);
         });
-        console.log('filterList', filterList)
         break;
       default:
     }
@@ -141,7 +140,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
         setUpdatedList([...result.data.items])
         setLoader(false)
       }).catch((e) => {
-        console.log(e)
+        setLoader(false)
       })
   }
 
