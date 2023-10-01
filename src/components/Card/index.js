@@ -35,7 +35,7 @@ const Card = ({ className, item }) => {
         </div>
         <div className={styles.foot}>
           <div className={styles.status}>
-            <p>{cardConst.name} :{`${item?.name}`.substring(0, 10) }</p>
+            <span>{cardConst.name} :{`${item?.name}`.substring(0, 10) }</span>
             <p className={styles.count}>
               {item?.rating_count > 0
                 ? `${cardConst.photCount} -${item?.rating_count} Items`
