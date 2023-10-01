@@ -15,7 +15,7 @@ const Card = ({ className, item }) => {
         <div className={styles.preview}>
           <Image
             size={{ width: '100%', height: '360px' }}
-            src={item?.images?.[0]??'https://cdn.discordapp.com/attachments/989739723151007764/1142453498508750868/mmojahid_mmm_text_logo_camera_mmm_text_at_bottom_white_backgrou_8759878f-0d1f-4ef2-a64c-8098313dbea8.png'}
+            src={item?.image??'https://cdn.discordapp.com/attachments/989739723151007764/1142453498508750868/mmojahid_mmm_text_logo_camera_mmm_text_at_bottom_white_backgrou_8759878f-0d1f-4ef2-a64c-8098313dbea8.png'}
             alt="Card"
             objectFit="cover"
           />

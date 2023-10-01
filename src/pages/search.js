@@ -32,7 +32,7 @@ import searchData from '../GlobalConst/search.json'
 const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
   const { categories } = useStateContext()
-  const [updateList, setUpdatedList] = React.useState(JSON.parse(JSON.stringify(searchData)));
+  const [updateList, setUpdatedList] = React.useState([]);
 
   const { data: searchResult, fetchData } = useFetchData(
     categoryData?.length ? categoryData : []
@@ -136,8 +136,8 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
     axionInstace.get('/search?query=A')
       .then((result) => {
-        console.log("result,", result)
-
+        console.log("result,", result.data)
+        setUpdatedList([...result.data.items])
       }).catch((e) => {
         console.log(e)
       })
@@ -264,30 +264,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
                 </div>
               </div>
-              {/* <div className={styles.range}>
-                <div className={styles.label}>Price range</div>
-                <div className={styles.prices}>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    value={min}
-                    onChange={handleChange}
-                    name="min"
-                    placeholder="MIN"
-                    required
-                  />
-                  <p className={styles.separator}>to</p>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    value={max}
-                    onChange={handleChange}
-                    name="max"
-                    placeholder="MAX"
-                    required
-                  />
-                </div>
-              </div> */}
+        
 
             </div>
             <div className={styles.wrapper}>
