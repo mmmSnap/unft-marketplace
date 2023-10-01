@@ -5,19 +5,20 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-const MuiLoader = ({loading}) => {
+const MuiLoader = ({loading,height=40}) => {
 //  const loading = true
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Box sx={{ height: 40 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent:'center' }}>
+            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent:'center', height }} >
                 <Fade
                     in={loading}
+                   
                     style={{
                         transitionDelay: loading ? '800ms' : '0ms',
                     }}
                     unmountOnExit
                 >
-                    <CircularProgress />
+                    <CircularProgress  />
                 </Fade>
             </Box>
         </Box>

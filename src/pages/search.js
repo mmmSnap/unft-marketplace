@@ -26,6 +26,7 @@ import {
   PRICE,
   SKILLS,
 } from "../GlobalConst/consts";
+import MuiLoader from '../components/MuiComponent/MuiLoader/MuiLoader'
 
 import searchData from '../GlobalConst/search.json'
 
@@ -33,7 +34,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
   const { categories } = useStateContext()
   const [updateList, setUpdatedList] = React.useState([]);
-
+  const [loader, setLoader] = React.useState(true)
   const { data: searchResult, fetchData } = useFetchData(
     categoryData?.length ? categoryData : []
   )
@@ -111,12 +112,12 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
         });
         break;
       case SKILLS:
-        
-         filterList = localData.filter((item) => {
+
+        filterList = localData.filter((item) => {
           FilterConstData.skills = valeExtractFromObject(listData);
-          return intersect(item.skills,  FilterConstData.skills );
+          return intersect(item.skills, FilterConstData.skills);
         });
-        console.log('filterList',filterList)
+        console.log('filterList', filterList)
         break;
       default:
     }
@@ -132,14 +133,16 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     }
   };
 
-  const getPhotGrapherDeatisl = ()=>{
-    axionInstace.get(`/v1/search?query=${search||'A'}`)
-    .then((result) => {
-      console.log("result,", result.data)
-      setUpdatedList([...result.data.items])
-    }).catch((e) => {
-      console.log(e)
-    })
+  const getPhotGrapherDeatisl = () => {
+    setLoader(true)
+    axionInstace.get(`/v1/search?query=${search || 'A'}`)
+      .then((result) => {
+        console.log("result,", result.data)
+        setUpdatedList([...result.data.items])
+        setLoader(false)
+      }).catch((e) => {
+        console.log(e)
+      })
   }
 
   React.useEffect(() => {
@@ -255,7 +258,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
               <div className={styles.form}>
                 <div className={styles.label}>Search keyword</div>
-                <MuiSearchComponent search={search} setSearch={setSearch} getPhotGrapherDeatisl={getPhotGrapherDeatisl}/>
+                <MuiSearchComponent search={search} setSearch={setSearch} getPhotGrapherDeatisl={getPhotGrapherDeatisl} />
               </div>
               <div className={styles.label}>Filter</div>
               <Divider color="primary" textAlign='left' />
@@ -268,7 +271,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
                 </div>
               </div>
-        
+
 
             </div>
             <div className={styles.wrapper}>
@@ -297,13 +300,16 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
               </div>
               <div className={styles.list}>
-                {updateList?.length ? (
-                  updateList?.map((x, index) => (
-                    <Card className={styles.card} item={x} key={index} />
-                  ))
-                ) : (
-                  <p className={styles.inform}>Try another category!</p>
-                )}
+                {loader ? (<div className={styles.loader}>
+                  <MuiLoader loading={loader} height={400} />
+                  </div>) :
+                  <>{updateList?.length ? (
+                    updateList?.map((x, index) => (
+                      <Card className={styles.card} item={x} key={index} />
+                    ))
+                  ) : (
+                    <p className={styles.inform}>Try another category!</p>
+                  )}</>}
               </div>
             </div>
           </div>
