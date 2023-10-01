@@ -132,15 +132,19 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     }
   };
 
+  const getPhotGrapherDeatisl = ()=>{
+    axionInstace.get(`/v1/search?query=${search||'A'}`)
+    .then((result) => {
+      console.log("result,", result.data)
+      setUpdatedList([...result.data.items])
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
   React.useEffect(() => {
 
-    axionInstace.get('/v1/search?query=A')
-      .then((result) => {
-        console.log("result,", result.data)
-        setUpdatedList([...result.data.items])
-      }).catch((e) => {
-        console.log(e)
-      })
+    getPhotGrapherDeatisl()
 
   }, [])
 
@@ -251,7 +255,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
               <div className={styles.form}>
                 <div className={styles.label}>Search keyword</div>
-                <MuiSearchComponent search={search} setSearch={setSearch} />
+                <MuiSearchComponent search={search} setSearch={setSearch} getPhotGrapherDeatisl={getPhotGrapherDeatisl}/>
               </div>
               <div className={styles.label}>Filter</div>
               <Divider color="primary" textAlign='left' />

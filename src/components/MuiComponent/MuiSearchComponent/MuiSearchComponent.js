@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 
-export const MuiSearchComponent = ({ search, setSearch }) => {
+export const MuiSearchComponent = ({ search, setSearch,getPhotGrapherDeatisl }) => {
 
 
     return (
@@ -23,7 +23,7 @@ export const MuiSearchComponent = ({ search, setSearch }) => {
                 placeholder="Search..."
                 inputProps={{ 'aria-label': 'Search' }}
             />
-            <IconButton type="button" sx={{ p: '10px' }} color='primary' aria-label="search">
+            <IconButton type="button" sx={{ p: '10px' }} color='primary' aria-label="search" onClick={getPhotGrapherDeatisl}>
                 <SearchIcon />
             </IconButton>
 
