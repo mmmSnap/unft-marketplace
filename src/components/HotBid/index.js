@@ -5,6 +5,7 @@ import Icon from '../Icon'
 import Card from '../Card'
 import { axionInstace } from '../../globalServices/axionInstace'
 import styles from './HotBid.module.sass'
+import MuiLoader from '../MuiComponent/MuiLoader/MuiLoader'
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
   <button aria-label="arrow" aria-hidden="true" {...props}>
@@ -51,21 +52,22 @@ const settings = {
 }
 
 const Hot = ({ classSection, info }) => {
-   const [photGapherList,setPhotoGrapherList] = React.useState([])
-
-   const getPhotGrapherDeatisl = ()=>{
+  const [photGapherList, setPhotoGrapherList] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
+  const getPhotGrapherDeatisl = () => {
     axionInstace.get(`/search?query=${'A'}`)
-    .then((result) => {
-      console.log("result,", result.data)
-      setPhotoGrapherList([...result.data.items])
-    }).catch((e) => {
-      console.log(e)
-    })
+      .then((result) => {
+        console.log("result,", result.data)
+        setPhotoGrapherList([...result.data.items])
+        setLoading(false)
+      }).catch((e) => {
+        console.log(e)
+      })
   }
 
-   React.useEffect(()=>{
+  React.useEffect(() => {
     getPhotGrapherDeatisl()
-   },[])
+  }, [])
 
   return (
     <div className={cn(classSection, styles.section)}>
@@ -73,12 +75,13 @@ const Hot = ({ classSection, info }) => {
         <div className={styles.wrapper}>
           <h2 className={cn('h3', styles.title)}>Top Photographer in {'Mumbai'}</h2>
           <div className={styles.inner}>
-            <Slider className="bid-slider" {...settings}>
-              {photGapherList &&
-                photGapherList?.map((x, index) => (
-                  <Card key={index} className={styles.card} item={x} />
-                ))}
-            </Slider>
+            {loading ? (<MuiLoader loading={loading} />) :
+              <Slider className="bid-slider" {...settings}>
+                {photGapherList &&
+                  photGapherList?.map((x, index) => (
+                    <Card key={index} className={styles.card} item={x} />
+                  ))}
+              </Slider>}
           </div>
         </div>
       </div>
