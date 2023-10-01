@@ -20,7 +20,7 @@ const Card = ({ className, item }) => {
             objectFit="cover"
           />
           <div className={styles.control}>
-            <div className={styles.category}>{item?.name.substring(0, 10)}</div>
+            <div className={styles.category}>{item?.name?.substring(0, 10)}</div>
             <button
               className={cn(styles.favorite, { [styles.active]: visible })}
               onClick={() => setVisible(!visible)}
