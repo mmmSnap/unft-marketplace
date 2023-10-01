@@ -134,7 +134,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
   React.useEffect(() => {
 
-    axionInstace.get('/search?query=A')
+    axionInstace.get('/v1/search?query=A')
       .then((result) => {
         console.log("result,", result.data)
         setUpdatedList([...result.data.items])
