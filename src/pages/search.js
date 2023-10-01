@@ -215,30 +215,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     handleFilterDataByParams({ search: debouncedSearchTerm })
   }
 
-  useEffect(() => {
-    let isMount = true
 
-    if (
-      isMount &&
-      (debouncedSearchTerm?.length ||
-        debouncedMinTerm?.length ||
-        debouncedMaxTerm?.length)
-    ) {
-      handleFilterDataByParams({
-        min: debouncedMinTerm,
-        max: debouncedMaxTerm,
-        search: debouncedSearchTerm,
-      })
-    } else {
-      !categoryData?.length &&
-        handleFilterDataByParams({ category: activeIndex })
-    }
-
-    return () => {
-      isMount = false
-    }
-
-  }, [debouncedSearchTerm, debouncedMinTerm, debouncedMaxTerm])
 
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata}>
