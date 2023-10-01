@@ -3,7 +3,7 @@ import cn from 'classnames'
 import Slider from 'react-slick'
 import Icon from '../Icon'
 import Card from '../Card'
-
+import { axionInstace } from '../../globalServices/axionInstace'
 import styles from './HotBid.module.sass'
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
@@ -51,6 +51,22 @@ const settings = {
 }
 
 const Hot = ({ classSection, info }) => {
+   const [photGapherList,setPhotoGrapherList] = React.useState([])
+
+   const getPhotGrapherDeatisl = ()=>{
+    axionInstace.get(`/search?query=${'A'}`)
+    .then((result) => {
+      console.log("result,", result.data)
+      setPhotoGrapherList([...result.data.items])
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
+   React.useEffect(()=>{
+    getPhotGrapherDeatisl()
+   },[])
+
   return (
     <div className={cn(classSection, styles.section)}>
       <div className={cn('container', styles.container)}>
@@ -58,9 +74,8 @@ const Hot = ({ classSection, info }) => {
           <h2 className={cn('h3', styles.title)}>Top Photographer in {'Mumbai'}</h2>
           <div className={styles.inner}>
             <Slider className="bid-slider" {...settings}>
-              {info &&
-                Object.keys(info)?.length &&
-                Object.values(info)[0]?.map((x, index) => (
+              {photGapherList &&
+                photGapherList?.map((x, index) => (
                   <Card key={index} className={styles.card} item={x} />
                 ))}
             </Slider>
