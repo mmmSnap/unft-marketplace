@@ -11,7 +11,7 @@ const Card = ({ className, item }) => {
 
   return (
     <div className={cn(styles.card, className)} aria-hidden="true">
-      <AppLink className={styles.link} href={`/item/${item?.slug}` || '/'}>
+      <AppLink className={styles.link} href={`/item/bird` || '/'}>
         <div className={styles.preview}>
           <Image
             size={{ width: '100%', height: '360px' }}
