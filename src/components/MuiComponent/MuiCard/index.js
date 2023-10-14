@@ -37,6 +37,7 @@ const CardStepperImage = ({images}) => {
         >
             {images?.map(image => <SwiperSlide>
                 <Image
+                   key={image?.key}
                     src={image?.src}
                     alt="Picture of the author"
                     width={image?.width || 360}

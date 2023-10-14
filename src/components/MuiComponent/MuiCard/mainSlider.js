@@ -21,7 +21,7 @@ const MainSliderComponent = (props) => {
        
         {searchResult && searchResult.map((items)=>{
             return (
-                <Grid item xs={3} md={3}>
+                <Grid item xs={3} md={3} key={items?.key}>
                 <MediaCard name={items?.name||''} items={items} bookNowHandler={bookNowHandler} />
               </Grid>  
             ) 
