@@ -290,7 +290,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                   >{updateList?.length ? (
                     updateList?.map((x, index) => (
                       // <Card className={styles.card} item={x} key={index} />
-                      <Grid item xs={4} md={4}>
+                      <Grid item xs={4} md={4} key={index}>
                         <MediaCard items={x} bookNowHandler={() => { }} />
                       </Grid>
 

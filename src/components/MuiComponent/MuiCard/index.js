@@ -36,9 +36,9 @@ const CardStepperImage = ({ images, key }) => {
             modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
         >
-            {images?.map(image => <SwiperSlide  key={image?.key}>
+            {images?.map((image,index) => <SwiperSlide  key={index}>
                 <Image
-                    key={image?.key}
+                    key={index}
                     src={image?.src}
                     alt="Picture of the author"
                     width={image?.width || 360}

@@ -19,10 +19,10 @@ const MainSliderComponent = (props) => {
         // sx={{ margin: "0 40px" }}
       >
        
-        {searchResult && searchResult.map((items)=>{
+        {searchResult && searchResult.map((items,index)=>{
             return (
-                <Grid item xs={3} md={3} key={items?.key}>
-                <MediaCard name={items?.name||''} items={items} bookNowHandler={bookNowHandler} />
+                <Grid item xs={3} md={3} key={index}>
+                <MediaCard key={index} name={items?.name||''} items={items} bookNowHandler={bookNowHandler} />
               </Grid>  
             ) 
         })}
