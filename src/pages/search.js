@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { Grid } from '@mui/material'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import { useStateContext } from '../utils/context/StateContext'
@@ -27,7 +28,7 @@ import {
   SKILLS,
 } from "../GlobalConst/consts";
 import MuiLoader from '../components/MuiComponent/MuiLoader/MuiLoader'
-
+import MediaCard from '../components/MuiComponent/MuiCard/card'
 import searchData from '../GlobalConst/search.json'
 
 const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
@@ -278,14 +279,25 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
               <div className={styles.list}>
                 {loader ? (<div className={styles.loader}>
                   <MuiLoader loading={loader} height={400} />
-                  </div>) :
-                  <>{updateList?.length ? (
+                </div>) :
+                  <Grid
+                    container
+                    display="flex"
+                    // justifyContent="center"
+                    // alignItems="center"
+                    spacing={1}
+                    sx={{marginTop:'50px'}}
+                  >{updateList?.length ? (
                     updateList?.map((x, index) => (
-                      <Card className={styles.card} item={x} key={index} />
+                      // <Card className={styles.card} item={x} key={index} />
+                      <Grid item xs={4} md={4}>
+                        <MediaCard items={x} bookNowHandler={() => { }} />
+                      </Grid>
+
                     ))
                   ) : (
                     <p className={styles.inform}>Try another category!</p>
-                  )}</>}
+                  )}</Grid>}
               </div>
             </div>
           </div>

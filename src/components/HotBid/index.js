@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@mui/material'
 import cn from 'classnames'
 import Slider from 'react-slick'
 import Icon from '../Icon'
@@ -6,7 +7,7 @@ import Card from '../Card'
 import { axionInstace } from '../../globalServices/axionInstace'
 import styles from './HotBid.module.sass'
 import MuiLoader from '../MuiComponent/MuiLoader/MuiLoader'
-
+import MediaCard from '../MuiComponent/MuiCard/card'
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
   <button aria-label="arrow" aria-hidden="true" {...props}>
     {children}
@@ -55,7 +56,7 @@ const Hot = ({ classSection, info }) => {
   const [photGapherList, setPhotoGrapherList] = React.useState([])
   const [loading, setLoading] = React.useState(true)
   const getPhotGrapherDeatisl = () => {
-    axionInstace.get(`/search?query=${'A'}`)
+    axionInstace.get(`/v1/search?query=${'A'}`)
       .then((result) => {
        
         setPhotoGrapherList([...result.data.items])
@@ -79,7 +80,9 @@ const Hot = ({ classSection, info }) => {
               <Slider className="bid-slider" {...settings}>
                 {photGapherList &&
                   photGapherList?.map((x, index) => (
-                    <Card key={index} className={styles.card} item={x} />
+                    <Grid item xs={4} md={4}>
+                    <MediaCard items={x} bookNowHandler={() => { }} />
+                  </Grid>
                   ))}
               </Slider>}
           </div>
