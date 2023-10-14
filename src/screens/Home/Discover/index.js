@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
+import { Grid } from '@mui/material'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import useFetchData from '../../../utils/hooks/useFetchData'
@@ -12,6 +13,7 @@ import Dropdown from '../../../components/Dropdown'
 import priceRange from '../../../utils/constants/priceRange'
 import { OPTIONS } from '../../../utils/constants/appConstants'
 import MuiFilter from '../../../components/MuiComponent/MuiFilter/MuiFilter'
+import MediaCard from '../../../components/MuiComponent/MuiCard/card'
 
 const ChipItem = [
   {
@@ -221,7 +223,9 @@ const Discover = ({ info, type }) => {
           >
             {filterResult?.length ? (
               filterResult?.map((info, index) => (
-                <Card className={styles.card} item={info} key={index} />
+                <Grid item xs={4} md={4} key={index}>
+                <MediaCard key={index} items={info} bookNowHandler={() => { }} />
+              </Grid>
               ))
             ) : (
               <p className={styles.inform}>Try another category!</p>
