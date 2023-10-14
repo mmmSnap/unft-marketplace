@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/css/navigation";
-import {Autoplay, Navigation, Pagination} from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const CardStepperImage = ({images}) => {
+const CardStepperImage = ({ images, key }) => {
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = () => {
@@ -24,6 +24,7 @@ const CardStepperImage = ({images}) => {
 
     return (<>
         <Swiper
+            key={key}
             speed={1000}
             autoplay={{
                 delay: 2500, disableOnInteraction: false,
@@ -37,7 +38,7 @@ const CardStepperImage = ({images}) => {
         >
             {images?.map(image => <SwiperSlide>
                 <Image
-                   key={image?.key}
+                    key={image?.key}
                     src={image?.src}
                     alt="Picture of the author"
                     width={image?.width || 360}

@@ -80,8 +80,8 @@ const Hot = ({ classSection, info }) => {
               <Slider className="bid-slider" {...settings}>
                 {photGapherList &&
                   photGapherList?.map((x, index) => (
-                    <Grid item xs={4} md={4}>
-                    <MediaCard items={x} bookNowHandler={() => { }} />
+                    <Grid item xs={4} md={4} key={index}>
+                    <MediaCard key={index} items={x} bookNowHandler={() => { }} />
                   </Grid>
                   ))}
               </Slider>}
