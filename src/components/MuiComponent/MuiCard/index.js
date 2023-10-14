@@ -36,7 +36,7 @@ const CardStepperImage = ({ images, key }) => {
             modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
         >
-            {images?.map(image => <SwiperSlide>
+            {images?.map(image => <SwiperSlide  key={image?.key}>
                 <Image
                     key={image?.key}
                     src={image?.src}
