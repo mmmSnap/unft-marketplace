@@ -4,10 +4,11 @@ import cn from 'classnames'
 import Slider from 'react-slick'
 import Icon from '../Icon'
 import Card from '../Card'
-import { axionInstace } from '../../globalServices/axionInstace'
 import styles from './HotBid.module.sass'
 import MuiLoader from '../MuiComponent/MuiLoader/MuiLoader'
 import MediaCard from '../MuiComponent/MuiCard/card'
+import { getPhotoGrapherDetails } from '../../globalServices/getPhotoGrapherDetails'
+
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
   <button aria-label="arrow" aria-hidden="true" {...props}>
     {children}
@@ -56,10 +57,9 @@ const Hot = ({ classSection, info }) => {
   const [photGapherList, setPhotoGrapherList] = React.useState([])
   const [loading, setLoading] = React.useState(true)
   const getPhotGrapherDeatisl = () => {
-    axionInstace.get(`/v1/search?query=${'A'}`)
+    getPhotoGrapherDetails()
       .then((result) => {
-       
-        setPhotoGrapherList([...result.data.items])
+        setPhotoGrapherList([...result.items])
         setLoading(false)
       }).catch((e) => {
         setLoading(false)
@@ -81,8 +81,8 @@ const Hot = ({ classSection, info }) => {
                 {photGapherList &&
                   photGapherList?.map((x, index) => (
                     <Grid item xs={4} md={4} key={index}>
-                    <MediaCard key={index} items={x} bookNowHandler={() => { }} />
-                  </Grid>
+                      <MediaCard key={index} items={x} bookNowHandler={() => { }} />
+                    </Grid>
                   ))}
               </Slider>}
           </div>

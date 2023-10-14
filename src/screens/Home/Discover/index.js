@@ -14,6 +14,7 @@ import priceRange from '../../../utils/constants/priceRange'
 import { OPTIONS } from '../../../utils/constants/appConstants'
 import MuiFilter from '../../../components/MuiComponent/MuiFilter/MuiFilter'
 import MediaCard from '../../../components/MuiComponent/MuiCard/card'
+import { getPhotoGrapherDetails } from '../../../globalServices/getPhotoGrapherDetails'
 
 const ChipItem = [
   {
@@ -78,8 +79,17 @@ const settings = {
 
 const Discover = ({ info, type }) => {
   const { push } = useRouter()
+  const [photGapherList, setPhotoGrapherList] = React.useState([])
   const { data: filterResult, fetchData } = useFetchData([])
   const [chipList, setChipList] = React.useState(ChipItem)
+
+  React.useEffect(()=>{
+    getPhotoGrapherDetails()
+    .then((result)=>{
+      setPhotoGrapherList([...result.items.slice(0,6)])
+    })
+
+  },[])
 
   const handleSelectChip = (id) => {
     const updatedList = chipList.map((chip) => {
@@ -190,11 +200,11 @@ const Discover = ({ info, type }) => {
         </div>
         <div className={styles.top}>
           <div className={styles.dropdown}>
-           
-         
-          <div className={styles.nav}>
-            <MuiChip  setChipList={handleSelectChip} chipList={chipList}/>
-          </div>
+
+
+            <div className={styles.nav}>
+              <MuiChip setChipList={handleSelectChip} chipList={chipList} />
+            </div>
           </div>
           <button
             className={cn(styles.filter, { [styles.active]: visible })}
@@ -210,8 +220,8 @@ const Discover = ({ info, type }) => {
         <div className={cn(styles.filters, { [styles.active]: visible })}>
           <div className={styles.sorting}>
             <div className={styles.cell}>
-            <MuiFilter   />
-            
+              <MuiFilter />
+
             </div>
           </div>
         </div>
@@ -221,11 +231,11 @@ const Discover = ({ info, type }) => {
             className={cn('discover-slider', styles.slider)}
             {...settings}
           >
-            {filterResult?.length ? (
-              filterResult?.map((info, index) => (
+            {photGapherList?.length ? (
+              photGapherList?.map((info, index) => (
                 <Grid item xs={4} md={4} key={index}>
-                <MediaCard key={index} items={info} bookNowHandler={() => { }} />
-              </Grid>
+                  <MediaCard key={index} items={info} bookNowHandler={() => { }} />
+                </Grid>
               ))
             ) : (
               <p className={styles.inform}>Try another category!</p>
