@@ -16,6 +16,8 @@ import MuiFilter from '../../../components/MuiComponent/MuiFilter/MuiFilter'
 import MediaCard from '../../../components/MuiComponent/MuiCard/card'
 import { getPhotoGrapherDetails } from '../../../globalServices/getPhotoGrapherDetails'
 
+import styles from './Discover.module.sass'
+
 const ChipItem = [
   {
     label: "All",
@@ -40,7 +42,6 @@ const ChipItem = [
 
 ]
 
-import styles from './Discover.module.sass'
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
   <button aria-label="arrow" aria-hidden="true" {...props}>
@@ -83,13 +84,13 @@ const Discover = ({ info, type }) => {
   const { data: filterResult, fetchData } = useFetchData([])
   const [chipList, setChipList] = React.useState(ChipItem)
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     getPhotoGrapherDetails()
-    .then((result)=>{
-      setPhotoGrapherList([...result.items.slice(0,6)])
-    })
+      .then((result) => {
+        setPhotoGrapherList([...result.items.slice(0, 8)])
+      })
 
-  },[])
+  }, [])
 
   const handleSelectChip = (id) => {
     const updatedList = chipList.map((chip) => {
@@ -233,7 +234,7 @@ const Discover = ({ info, type }) => {
           >
             {photGapherList?.length ? (
               photGapherList?.map((info, index) => (
-                <Grid item xs={4} md={4} key={index}>
+                <Grid item xs={3} md={3} key={index} sx={{width:"260px",margin:"15px 13px"}}>
                   <MediaCard key={index} items={info} bookNowHandler={() => { }} />
                 </Grid>
               ))
