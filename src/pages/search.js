@@ -35,6 +35,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
   const { categories } = useStateContext()
   const [updateList, setUpdatedList] = React.useState([]);
+  const [orignalList, setOrignalList] = React.useState([])
   const [loader, setLoader] = React.useState(true)
   const { data: searchResult, fetchData } = useFetchData(
     categoryData?.length ? categoryData : []
@@ -85,9 +86,10 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
       [name]: value,
     }))
   }
+
   const filterData = (listData, filterType) => {
     const gender = listData;
-    const localData = JSON.parse(JSON.stringify(searchData));
+    const localData = JSON.parse(JSON.stringify(orignalList));
     let filterList = [];
     switch (filterType) {
       case GENDER:
@@ -108,7 +110,6 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
       case EXPERTISE:
         filterList = localData.filter((item) => {
           FilterConstData.expertise = valeExtractFromObject(listData);
-
           return intersect(item.expertise, FilterConstData.expertise);
         });
         break;
@@ -137,8 +138,9 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     setLoader(true)
     axionInstace.get(`/v1/search?query=${search || 'A'}`)
       .then((result) => {
-        console.log("result,", result.data)
+        orignalList = JSON.parse(JSON.stringify(result.data.items))
         setUpdatedList([...result.data.items])
+        setOrignalList([...result.data.items])
         setLoader(false)
       }).catch((e) => {
         setLoader(false)
@@ -286,7 +288,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                     // justifyContent="center"
                     // alignItems="center"
                     spacing={1}
-                    sx={{marginTop:'50px'}}
+                    sx={{ marginTop: '50px' }}
                   >{updateList?.length ? (
                     updateList?.map((x, index) => (
                       // <Card className={styles.card} item={x} key={index} />
