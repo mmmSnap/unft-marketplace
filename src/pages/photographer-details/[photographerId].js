@@ -135,6 +135,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                             Rating : {photographerDetails?.rating}
                         </div>
                     
+                    
                         <div className={styles.actions}>
                          
                             <div className={styles.btns}>
