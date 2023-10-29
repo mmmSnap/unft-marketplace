@@ -9,13 +9,15 @@ import Dropdown from '../../components/Dropdown'
 import Modal from '../../components/Modal'
 import OAuth from '../../components/OAuth'
 import Image from '../../components/Image'
+import Loader from '../../components/Loader'
+import { useRouter } from 'next/router'
 import {
   getDataBySlug,
   getAllDataByType,
   getDataByCategory,
 } from '../../lib/cosmic'
 import getStripe from '../../lib/getStripe'
-
+import { getSinglePhotoGrapher } from '../../globalServices/getPhotoGrapherDetails'
 import styles from '../../styles/pages/Item.module.sass'
 
 const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
@@ -23,7 +25,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
   const [photographerDetails,setPhotographerDetails] = React.useState({})
   const [activeIndex, setActiveIndex] = useState(0)
   const [visibleAuthModal, setVisibleAuthModal] = useState(false)
-
+  const  [isLoading,setIsLoading] = useState(false)
   const counts = itemInfo?.[0]?.metadata?.count
     ? Array(itemInfo[0]?.metadata?.count)
         .fill(1)
@@ -34,9 +36,15 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
   const handleAddToCart = () => {
     cosmicUser?.hasOwnProperty('id') ? handleCheckout() : handleOAuth()
   }
+  const router = useRouter()
+
+  const {photographerId} = router.query
 
   React.useEffect(()=>{
-
+    getSinglePhotoGrapher(photographerId).then((data)=>{
+       
+        setPhotographerDetails({...data})
+    })
   },[])
   const handleOAuth = useCallback(
     async user => {
@@ -72,6 +80,10 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
     }
   }
 
+  if(isLoading){
+   <Loader   isLoading={isLoading} />
+  }
+
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata}>
       <div className={cn('section', styles.section)}>
@@ -87,7 +99,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                 <Image
                   size={{ width: '100%', height: '100%' }}
                   srcSet={`${itemInfo[0]?.metadata?.image?.imgix_url}`}
-                  src={itemInfo[0]?.metadata?.image?.imgix_url}
+                  src={photographerDetails?.images?.length?photographerDetails?.images[0]:''}  //{itemInfo[0]?.metadata?.image?.imgix_url}
                   alt="Item"
                   objectFit="cover"
                 />
@@ -95,19 +107,20 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
             </div>
           </div>
           <div className={styles.details}>
-            <h1 className={cn('h3', styles.title)}>{itemInfo[0]?.title}</h1>
+            <h1 className={cn('h4', styles.title)}>{photographerDetails.name}</h1>
             <div className={styles.cost}>
               <div className={cn('status-stroke-green', styles.price)}>
                 {`$${itemInfo[0]?.metadata?.price}`}
               </div>
               <div className={styles.counter}>
-                {itemInfo[0]?.metadata?.count > 0
-                  ? `${itemInfo[0]?.metadata?.count} in stock`
-                  : 'Not Available'}
+                {}
               </div>
             </div>
             <div className={styles.info}>
-              {itemInfo[0]?.metadata?.description}
+              About :{itemInfo[0]?.metadata?.description}
+            </div>
+            <div className={styles.info}>
+              Address : {photographerDetails?.address||''}
             </div>
             <div className={styles.nav}>
               {itemInfo[0]?.metadata?.categories?.map((x, index) => (
