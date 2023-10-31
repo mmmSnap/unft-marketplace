@@ -99,7 +99,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                                 <Image
                                     size={{ width: '100%', height: '100%' }}
                                     srcSet={`${itemInfo[0]?.metadata?.image?.imgix_url}`}
-                                    src={photographerDetails?.images?.length ? photographerDetails?.images[0] : ''}  //{itemInfo[0]?.metadata?.image?.imgix_url}
+                                    src={photographerDetails?.images?.length ? photographerDetails?.images[0] : itemInfo[0]?.metadata?.image?.imgix_url}  //{itemInfo[0]?.metadata?.image?.imgix_url}
                                     alt="Item"
                                     objectFit="cover"
                                 />
@@ -123,9 +123,9 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                             Address : {photographerDetails?.address || ''}
                         </div>
                         <div className={styles.info}>
-                            Skills : {photographerDetails?.skills&&photographerDetails?.skills?.map((item) => {
+                            Skills : {photographerDetails?.skills&&photographerDetails?.skills?.map((item,index) => {
                                 return (
-                                    <span>
+                                    <span key={`${item}-${index}`}>
                                         {`${item} `}
                                     </span>
                                 )
@@ -135,7 +135,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                             Rating : {photographerDetails?.rating}
                         </div>
                     
-                    
+
                         <div className={styles.actions}>
                          
                             <div className={styles.btns}>
