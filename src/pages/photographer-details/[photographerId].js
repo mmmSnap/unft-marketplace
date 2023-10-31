@@ -11,6 +11,7 @@ import OAuth from '../../components/OAuth'
 import Image from '../../components/Image'
 import Loader from '../../components/Loader'
 import { useRouter } from 'next/router'
+import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent'
 import {
     getDataBySlug,
     getAllDataByType,
@@ -123,7 +124,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                             Address : {photographerDetails?.address || ''}
                         </div>
                         <div className={styles.info}>
-                            Skills : {photographerDetails?.skills&&photographerDetails?.skills?.map((item,index) => {
+                            Skills : {photographerDetails?.skills && photographerDetails?.skills?.map((item, index) => {
                                 return (
                                     <span key={`${item}-${index}`}>
                                         {`${item} `}
@@ -134,10 +135,12 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                         <div className={styles.info}>
                             Rating : {photographerDetails?.rating}
                         </div>
-                    
 
+                        <div className={styles.info}>
+                            <MuiDateComponent />
+                        </div>
                         <div className={styles.actions}>
-                         
+
                             <div className={styles.btns}>
                                 <button
                                     className={cn('button', styles.button)}
