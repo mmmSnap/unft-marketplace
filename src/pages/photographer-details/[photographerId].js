@@ -11,6 +11,7 @@ import OAuth from '../../components/OAuth'
 import Image from '../../components/Image'
 import Loader from '../../components/Loader'
 import { useRouter } from 'next/router'
+import GridImage from '../../components/MuiComponent/GridImage/GridImage'
 import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent'
 import {
     getDataBySlug,
@@ -152,9 +153,10 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                         </div>
                     </div>
                 </div>
-
+                <GridImage  />
             </div>
-
+            
+            
         </Layout>
     )
 }
