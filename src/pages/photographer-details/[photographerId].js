@@ -25,6 +25,7 @@ import styles from '../../styles/pages/Item.module.sass'
 const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
     const { onAdd, cartItems, cosmicUser } = useStateContext()
     const [photographerDetails, setPhotographerDetails] = React.useState({})
+    const [imageList,setImageList] = React.useState([])
     const [activeIndex, setActiveIndex] = useState(0)
     const [visibleAuthModal, setVisibleAuthModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -44,7 +45,16 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
 
     React.useEffect(() => {
         getSinglePhotoGrapher(photographerId).then((data) => {
-
+            const imagesList = data.images.map((image)=>{
+                return {
+                    src: image||"https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
+                    original: image||"https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
+                    width: 320,
+                    height: 212,
+                    caption: data.name,
+                }
+            })
+            setImageList([...imagesList])
             setPhotographerDetails({ ...data })
         })
     }, [])
@@ -153,7 +163,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                         </div>
                     </div>
                 </div>
-                <GridImage  />
+                <GridImage images={imageList} />
             </div>
             
             
