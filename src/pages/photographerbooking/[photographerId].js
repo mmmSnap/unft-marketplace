@@ -1,17 +1,12 @@
 import React from 'react'
-import MuiBookingDetailsPage from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingDetailsPage'
 import Layout from '../../components/Layout'
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -20,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import ReviewDetails from '../../components/MuiComponent/MuiBookingDetailsPage/reviewDetails';
 import BookingConfirm from '../../components/MuiComponent/MuiBookingDetailsPage/bookingConfirm';
+import MuiBookingDetailsPage from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingDetailsPage'
 
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
 function getStepContent(step) {
