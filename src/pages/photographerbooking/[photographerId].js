@@ -15,13 +15,12 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import ReviewDetails from '../../components/MuiComponent/MuiBookingDetailsPage/reviewDetails';
 import BookingConfirm from '../../components/MuiComponent/MuiBookingDetailsPage/bookingConfirm';
-// import MuiBookingDetailsPage from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingDetailsPage'
-
+import MuiBookingForms from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingForms';
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
 function getStepContent(step) {
   switch (step) {
     case 0:
-      // return <MuiBookingDetailsPage />;
+      return <MuiBookingForms />;
     case 1:
       return <ReviewDetails />;
     case 2:

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function MuiBookingDetailsPage() {
+export default function MuiBookingForms() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
