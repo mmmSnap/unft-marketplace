@@ -1,6 +1,8 @@
 import React from 'react'
 import MuiBookingDetailsPage from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingDetailsPage'
 import Layout from '../../components/Layout'
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,7 +20,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import ReviewDetails from '../../components/MuiComponent/MuiBookingDetailsPage/reviewDetails';
 import BookingConfirm from '../../components/MuiComponent/MuiBookingDetailsPage/bookingConfirm';
-
 
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
 function getStepContent(step) {
