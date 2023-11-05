@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 // import CardStepperImage from "./index";
 
 
-export default function MediaCard({ name, items, bookNowHandler }) {
+export default function MediaCard({ name, items }) {
   const router = useRouter()
 
   let images = [
@@ -30,7 +30,9 @@ export default function MediaCard({ name, items, bookNowHandler }) {
   ];
   images = items?.images?.filter((item) => item !== "" || item !== null || true).map((item) => { return { src: item } }) || images;
   images = images.length > 3 ? images.slice(0, 3) : images;
-
+    const bookNowHandler = (key)=>{
+      router.push(`/photographerbooking/${key}`)
+    }
   const image = images[0]
 
   if (!image.src) {
