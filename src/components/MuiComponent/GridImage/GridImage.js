@@ -4,17 +4,15 @@ import Lightbox from "react-image-lightbox";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import "react-image-lightbox/style.css";
-import { images } from "../../../../public/images/GridImage/image";
 
 
-const GridImage  =()=> {
+const GridImage  =({images:imageProps})=> {
   const [index, setIndex] = useState(-1);
-
-  const currentImage = images[index];
-  const nextIndex = (index + 1) % images.length;
-  const nextImage = images[nextIndex] || currentImage;
-  const prevIndex = (index + images.length - 1) % images.length;
-  const prevImage = images[prevIndex] || currentImage;
+  const currentImage = imageProps[index];
+  const nextIndex = (index + 1) % imageProps.length;
+  const nextImage = imageProps[nextIndex] || currentImage;
+  const prevIndex = (index + imageProps.length - 1) % imageProps.length;
+  const prevImage = imageProps[prevIndex] || currentImage;
 
   const handleClick = (index) => setIndex(index);
   const handleClose = () => setIndex(-1);
@@ -31,7 +29,7 @@ const GridImage  =()=> {
      </Grid>
      <Grid item xs={10}>
       <Gallery
-        images={images}
+        images={imageProps}
         onClick={handleClick}
         enableImageSelection={false}
         maxRows={4}
