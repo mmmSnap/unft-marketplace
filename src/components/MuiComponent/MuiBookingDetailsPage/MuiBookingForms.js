@@ -5,10 +5,10 @@ import TextField from '@mui/material/TextField';
 import userInfoForm from './hooks/userInfoForm';
 
 const mandatoryError  ='This field is mandatory'
-export default function MuiBookingForms() {
+export default function MuiBookingForms(photoGrapherAddress) {
 
   const { register, formState: { errors } } = userInfoForm()
-  console.log('errors',errors)
+  console.log('errors',photoGrapherAddress)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

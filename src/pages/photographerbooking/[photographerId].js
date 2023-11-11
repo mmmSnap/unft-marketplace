@@ -13,14 +13,18 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useRouter } from 'next/router'
 import ReviewDetails from '../../components/MuiComponent/MuiBookingDetailsPage/reviewDetails';
 import BookingConfirm from '../../components/MuiComponent/MuiBookingDetailsPage/bookingConfirm';
 import MuiBookingForms from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingForms';
+import { getSinglePhotoGrapher } from '../../globalServices/getPhotoGrapherDetails';
+import PhotoGrapherAddress from '../../components/MuiComponent/MuiBookingDetailsPage/PhotoGrapherAddress';
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
-function getStepContent(step) {
+function getStepContent(step, photoGrapherAddress, type) {
+  console.log('photoGrapherAddress',photoGrapherAddress)
   switch (step) {
     case 0:
-      return <MuiBookingForms />;
+      return  type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} /> : <MuiBookingForms photoGrapherAddress={photoGrapherAddress} /> ;
     case 1:
       return <ReviewDetails />;
     case 2:
@@ -31,6 +35,17 @@ function getStepContent(step) {
 }
 export default function PhotograherBookingPage() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [addressType, setAddressType] = React.useState('Studio Address')
+  const router = useRouter()
+  const [photoGrapherAddress, setPhotoGrapherAddress] = React.useState({})
+  const { photographerId } = router.query
+
+  React.useEffect(() => {
+    getSinglePhotoGrapher(photographerId)
+      .then((response) => {
+        setPhotoGrapherAddress(response)
+      })
+  }, [])
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -62,9 +77,10 @@ export default function PhotograherBookingPage() {
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              defaultValue={addressType}
             >
-              <FormControlLabel value="female" control={<Radio />} label="Studio Address" />
-              <FormControlLabel value="male" control={<Radio />} label="Personal Address" />
+              <FormControlLabel  value="Studio Address" onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Studio Address" />
+              <FormControlLabel   value="Personal Address"  onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Personal Address" />
 
             </RadioGroup>
           </FormControl>
@@ -81,7 +97,7 @@ export default function PhotograherBookingPage() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, photoGrapherAddress, addressType)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
