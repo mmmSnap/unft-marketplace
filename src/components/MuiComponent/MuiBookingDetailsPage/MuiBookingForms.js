@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import userInfoForm from './hooks/userInfoForm';
 
+const mandatoryError  ='This field is mandatory'
 export default function MuiBookingForms() {
 
   const { register, formState: { errors } } = userInfoForm()
@@ -24,7 +25,7 @@ export default function MuiBookingForms() {
             {...register('firstName', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['firstName']}
@@ -43,7 +44,7 @@ export default function MuiBookingForms() {
             {...register('lastName', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['lastName']}
@@ -62,7 +63,7 @@ export default function MuiBookingForms() {
             {...register('address1', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['address1']}
@@ -79,7 +80,7 @@ export default function MuiBookingForms() {
             {...register('address2', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['address2']}
@@ -99,7 +100,7 @@ export default function MuiBookingForms() {
             {...register('city', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['city']}
@@ -116,7 +117,7 @@ export default function MuiBookingForms() {
             {...register('state', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['state']}
@@ -133,7 +134,7 @@ export default function MuiBookingForms() {
             {...register('pincode', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['pincode']}
@@ -151,7 +152,7 @@ export default function MuiBookingForms() {
             {...register('country', {
               required: {
                 value: true,
-                message: "This is field is mandatory"
+               message: mandatoryError
               }
             })}
             error={errors['country']}
