@@ -2,16 +2,18 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import userInfoForm from './hooks/userInfoForm';
 
 export default function MuiBookingForms() {
+
+  const { register, formState: { errors } } = userInfoForm()
+  console.log('errors',errors)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-      
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -19,6 +21,14 @@ export default function MuiBookingForms() {
             id="firstName"
             name="firstName"
             label="First name"
+            {...register('firstName', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['firstName']}
+            helperText={errors['firstName']?errors['firstName'].message:""}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -30,6 +40,14 @@ export default function MuiBookingForms() {
             id="lastName"
             name="lastName"
             label="Last name"
+            {...register('lastName', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['lastName']}
+            helperText={errors['lastName']?errors['lastName'].message:""}
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -41,6 +59,14 @@ export default function MuiBookingForms() {
             id="address1"
             name="address1"
             label="Address line 1"
+            {...register('address1', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['address1']}
+            helperText={errors['address1']?errors['address1'].message:""}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
@@ -50,6 +76,14 @@ export default function MuiBookingForms() {
           <TextField
             id="address2"
             name="address2"
+            {...register('address2', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['address2']}
+            helperText={errors['address2']?errors['address2'].message:""}
             label="Address line 2"
             fullWidth
             autoComplete="shipping address-line2"
@@ -62,6 +96,14 @@ export default function MuiBookingForms() {
             id="city"
             name="city"
             label="City"
+            {...register('city', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['city']}
+            helperText={errors['city']?errors['city'].message:""}
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
@@ -71,6 +113,14 @@ export default function MuiBookingForms() {
           <TextField
             id="state"
             name="state"
+            {...register('state', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['state']}
+            helperText={errors['state']?errors['state'].message:""}
             label="State/Province/Region"
             fullWidth
             variant="standard"
@@ -80,7 +130,15 @@ export default function MuiBookingForms() {
           <TextField
             required
             id="zip"
-            name="zip"
+            {...register('pincode', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['pincode']}
+            helperText={errors['pincode']?errors['pincode'].message:""}
+            name="pincode"
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
@@ -90,6 +148,14 @@ export default function MuiBookingForms() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            {...register('country', {
+              required: {
+                value: true,
+                message: "This is field is mandatory"
+              }
+            })}
+            error={errors['country']}
+            helperText={errors['country']?errors['country'].message:""}
             id="country"
             name="country"
             label="Country"
@@ -98,12 +164,7 @@ export default function MuiBookingForms() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid>
+       
       </Grid>
     </React.Fragment>
   );
