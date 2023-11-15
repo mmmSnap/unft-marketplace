@@ -2,7 +2,7 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 
-const userInfoForm = ()=>{
+const UserInfoForm = ()=>{
 
     const form = useForm({
         mode: "onBlur",
@@ -10,4 +10,4 @@ const userInfoForm = ()=>{
    return form
 }
 
-export default userInfoForm
+export default UserInfoForm
