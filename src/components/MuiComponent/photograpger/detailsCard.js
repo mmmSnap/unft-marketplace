@@ -31,7 +31,7 @@ const card = (
       <Typography  variant="body2" sx={{color:"red",textAlign:"right"}}  color="text.danger">
         Icon
       </Typography>
-      <Button size="small" onClick={()=>''}>Continue</Button> //photographer/profile
+      <Button size="small" onClick={()=>''}>Continue</Button> 
     </CardContent>
   </>
 );
