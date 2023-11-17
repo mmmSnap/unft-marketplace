@@ -20,7 +20,7 @@ const bull = (
 );
 
 const card = (
-  <React.Fragment>
+  <>
     <CardContent>
       <Typography variant="body1" color="text.secondary" >
         Complete important details
@@ -33,7 +33,7 @@ const card = (
       </Typography>
       <Button size="small" onClick={()=>''}>Continue</Button> //photographer/profile
     </CardContent>
-  </React.Fragment>
+  </>
 );
 
 export default function DetailsCard() {
@@ -41,7 +41,7 @@ export default function DetailsCard() {
   return (
     <Box sx={{ maxWidth: 360 }}>
       <Card variant="outlined">
-      <React.Fragment>
+      <>
     <CardContent>
       <Typography variant="body1" color="text.secondary" >
         Complete important details
@@ -54,7 +54,7 @@ export default function DetailsCard() {
       </Typography>
       <Button size="small" onClick={()=>router.push('/photographer/profile')}>Continue</Button> 
     </CardContent>
-  </React.Fragment>
+  </>
       </Card>
     </Box>
   );
