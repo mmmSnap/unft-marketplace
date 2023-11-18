@@ -9,9 +9,11 @@ import { Controller } from "react-hook-form";
 export default function RowRadioButtonsGroup(props) {
   const { addressType,fieldName, label, control,setAddType } = props;
 
-  const displayRadioGroup = addressType.map((items) => {
+  const displayRadioGroup = addressType.map((items,index) => {
     return (
+     
       <FormControlLabel
+      key={`key-index-${index}`}
         value={items.label}
         control={<Radio />}
         label={items.label}
