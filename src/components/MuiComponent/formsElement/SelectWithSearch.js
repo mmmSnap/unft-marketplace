@@ -20,6 +20,7 @@ export default function SelectFields(props) {
         return (
         <Autocomplete
           {...field}
+          variant="standard"
           getOptionLabel={(option) => '+'+option.phone}
           renderOption={(props, option) => (
             <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
@@ -40,6 +41,7 @@ export default function SelectFields(props) {
           }}
           renderInput={(params) => (
             <TextField {...params} label={fieldName || ""} {...field}  error={error}
+            variant="standard"
             helperText={error?error.message:""}
             InputProps={{
               ...params.InputProps,

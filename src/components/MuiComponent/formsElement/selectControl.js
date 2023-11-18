@@ -17,7 +17,7 @@ export default function CountrySelect({ onChange: ignored, control }) {
             <TextField
               {...params}
               label="Choose a country"
-              variant="outlined"
+              variant="standard"
             />
           )}
           onChange={(e, data) => onChange(data)}

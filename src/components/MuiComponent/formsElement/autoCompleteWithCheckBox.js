@@ -55,6 +55,7 @@ export default function AutoCompleteWitCheckBox(props) {
                 placeholder="Select your skills"
                 error={error}
                 helperText={error ? error.message : ""}
+                variant="standard"
               />
             )}
           />

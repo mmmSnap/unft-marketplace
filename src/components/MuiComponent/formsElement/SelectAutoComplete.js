@@ -35,6 +35,7 @@ export default function SelectAutoComplete(props) {
                 label={fieldName || ""}
                 error={error}
                 helperText={error ? error.message : ""}
+                variant="standard"
               />
             )}
           />

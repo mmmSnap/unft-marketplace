@@ -15,6 +15,7 @@ const TextInputFields = React.forwardRef((props,forwardedRef) => {
             ref={forwardedRef}
             // size="small"
             {...rest}
+            variant="standard"
 
         />
     )
