@@ -31,7 +31,8 @@ export default function BasicDatePicker(props) {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label={label||"Date of Birth"}
-              variant="standard"
+              inputVariant="standard"    
+              slotProps={{ textField: { variant: "standard" } }   }    
               value={value}
               // inputProps={{ onBlur:()=> field.onBlur()}}
               minDate={minDate}
@@ -50,7 +51,7 @@ export default function BasicDatePicker(props) {
                   {...params}
                   error={error }
                   helperText={error   ? error.message : ""}
-                  variant="standard"
+                  inputVariant="standard"
                 />
               )}
             />
