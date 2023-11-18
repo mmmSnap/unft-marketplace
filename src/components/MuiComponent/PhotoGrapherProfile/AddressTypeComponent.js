@@ -57,21 +57,21 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
         component="div"
         sx={{ flexGrow: 1, mt: 4, mb: 3 }}
       >
-        {"Address Type"}
+        {"Address Details"}
       </Typography>
       <Divider sx={{ mt: 1, mb: 4 }} />
-      <Grid container spacing={2}>
-        <Grid item xs={6} md={5}>
+      <Grid container spacing={1}>
+        <Grid item xs={6} md={6}>
           <RowRadioButtonsGroup
             addressType={AddressType}
             setAddType={setAddType}
             control={control}
             fieldName={ADDRESS_TYPE}
-            label={"Select Address Type"}
+            // label={"Select Address Type"}
           />
         </Grid>
         {addType === "Business/Studio Address" && (
-          <Grid item xs={12} md={10}>
+          <Grid item xs={12} md={12}>
             <FormHelperText>
               ProTip: This name will be displayed on your profile
             </FormHelperText>
@@ -83,7 +83,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             />
           </Grid>
         )}
-        <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={12}>
           <TextInputFields
             id="outlined-textarea"
             label="Flat, House no. Building, Company, Apartment"
@@ -93,7 +93,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             // size="small"
           />
         </Grid>
-        <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={12}>
           <TextInputFields
             id="outlined-textarea"
             label="Area, Street, Sector, Village"
@@ -103,7 +103,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             // size="small"
           />
         </Grid>
-        <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={12}>
           <TextInputFields
             id="outlined-textarea"
             label="Landmark, Near by"
@@ -113,7 +113,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             // size="small"
           />
         </Grid>
-        <Grid item xs={6} md={5}>
+        <Grid item xs={6} md={6}>
           <TextInputFields
             id="outlined-textarea"
             label="Pincode"
@@ -123,7 +123,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             // size="s mall"
           />
         </Grid>
-        <Grid item xs={6} md={5}>
+        <Grid item xs={6} md={6}>
           <TextInputFields
             id="outlined-textarea"
             label="City"
@@ -133,7 +133,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             // size="small"
           />
         </Grid>
-        <Grid item xs={6} md={5}>
+        <Grid item xs={6} md={6}>
           <TextInputFields
             id="outlined-textarea"
             label="State"
@@ -143,7 +143,7 @@ const AddressTypeComponent = ({ fieldsForm, control }) => {
             // size="small"
           />
         </Grid>
-        <Grid item xs={6} md={5}>
+        <Grid item xs={6} md={6}>
           <SelectAutoComplete {...fieldsForm[COUNTRY_LIST]} />
         </Grid>
       </Grid>

@@ -23,13 +23,13 @@ const UserInfo = ({ fieldsForm,data ,control}) => {
     return (
         <>
             
-                <Typography variant="h4" component="div" sx={{ flexGrow: 1, mt: 3, mb: 3 }} >
+                <Typography variant="h4" component="div" sx={{ flexGrow: 1, mt: 1, mb: 3 }} >
                     {CONST_FILE.photoGrapherDetails}
                 </Typography>
                 <Divider sx={{ mb: 4 }} />
 
-                <Grid container spacing={2} >
-                    <Grid item xs={6} md={10}>
+                <Grid container spacing={1} >
+                    <Grid item xs={6} md={6}>
                         <TextInputFields
                             fullWidth={'true'}
                             data-testid="first-name-id"
@@ -37,7 +37,7 @@ const UserInfo = ({ fieldsForm,data ,control}) => {
                             {...fieldsForm[FIRST_NAME]}
                         />
                     </Grid>
-                    <Grid item xs={6} md={10}>
+                    <Grid item xs={6} md={6}>
                         <TextInputFields
                             id="outlined-textarea"
                             label="Last Name"
@@ -48,11 +48,11 @@ const UserInfo = ({ fieldsForm,data ,control}) => {
 
                         />
                     </Grid>
-                    <Grid item xs={6} md={10}>
+                    <Grid item xs={6} md={12}>
                       
                         
                     </Grid>
-                    <Grid item xs={6} md={10}>
+                    <Grid item xs={6} md={12}>
                         <TextInputFields
                             id="outlined-textarea"
                             label="Email id"
@@ -62,12 +62,12 @@ const UserInfo = ({ fieldsForm,data ,control}) => {
 
                         />
                     </Grid>
-                    <Grid item xs={2} md={3}>
+                    <Grid item xs={2} md={4}>
                         {/* <SelectWithSearch data={countryCode} fieldName="Code" /> */}
                         <SelectAutoComplete  {...fieldsForm[COUNTRY_CODE]}  />
 
                     </Grid>
-                    <Grid item xs={4} md={7}>
+                    <Grid item xs={4} md={8}>
                         <TextInputFields
                             required
                             id="outlined-textarea"
@@ -81,11 +81,11 @@ const UserInfo = ({ fieldsForm,data ,control}) => {
                     </Grid>
 
 
-                    <Grid item xs={6} md={5}>
+                    <Grid item xs={6} md={4}>
                     <DatePickerTest  {...fieldsForm[DATE_OF_BIRTH]}/>
                         {/* <DatePickers DATE_OF_BIRTH /> */}
                     </Grid>
-                    <Grid item xs={6} md={5}>
+                    <Grid item xs={6} md={8}>
                         <SelectAutoComplete   label="Gender" {...fieldsForm[GENDER]} defaultValue={data[GENDER]} />
                     </Grid>
                 </Grid>

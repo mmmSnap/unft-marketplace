@@ -23,17 +23,17 @@ const OtherSkills = ({fieldsForm,control})=>{
                 {"Other information"}
             </Typography>
             <Divider sx={{ mb: 4 }} />
-            <Grid container spacing={4}>
-                <Grid item xs={6} md={10}>
+            <Grid container spacing={2}>
+                <Grid item xs={6} md={12}>
                     <AutoCompleteWitCheckBox {...fieldsForm[SKILLS]} />
                 </Grid>
-                <Grid item xs={6} md={10}>
+                <Grid item xs={6} md={12}>
                     <AutoCompleteWitCheckBox {...fieldsForm[EXPERTISE]} />
                 </Grid>
-                <Grid item xs={6} md={10}>
+                <Grid item xs={6} md={12}>
                     <SelectAutoComplete {...fieldsForm[PRICE]} />
                 </Grid>
-                <Grid item xs={6} md={10}>
+                <Grid item xs={6} md={12}>
                     <TextInputFields
                         id="outlined-textarea"
                         label="Price Value"
@@ -41,7 +41,7 @@ const OtherSkills = ({fieldsForm,control})=>{
                         {...fieldsForm[PRICE_VALUE]}
                     />
                 </Grid>
-                <Grid item xs={6} md={10}>
+                <Grid item xs={6} md={12}>
                     <TextInputFields
                         id="outlined-textarea"
                         label="Instagram Id"
