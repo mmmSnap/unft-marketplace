@@ -21,7 +21,7 @@ import { getSinglePhotoGrapher } from '../../globalServices/getPhotoGrapherDetai
 import PhotoGrapherAddress from '../../components/MuiComponent/MuiBookingDetailsPage/PhotoGrapherAddress';
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
 function getStepContent(step, photoGrapherAddress, type) {
-  console.log('photoGrapherAddress',photoGrapherAddress)
+  
   switch (step) {
     case 0:
       return  type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} /> : <MuiBookingForms photoGrapherAddress={photoGrapherAddress} /> ;

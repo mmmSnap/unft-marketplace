@@ -3,12 +3,13 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import userInfoForm from './hooks/userInfoForm';
+import { NONZERO_INTEGER_REGEX } from '../../../consts/RegExp';
 
 const mandatoryError  ='This field is mandatory'
 export default function MuiBookingForms(photoGrapherAddress) {
 
   const { register, formState: { errors } } = userInfoForm()
-  console.log('errors',photoGrapherAddress)
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -45,7 +46,8 @@ export default function MuiBookingForms(photoGrapherAddress) {
               required: {
                 value: true,
                message: mandatoryError
-              }
+              },
+             
             })}
             error={errors['lastName']}
             helperText={errors['lastName']?errors['lastName'].message:""}
@@ -54,6 +56,51 @@ export default function MuiBookingForms(photoGrapherAddress) {
             variant="standard"
           />
         </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            required
+            id="emailId"
+            name="emailId"
+            label="Email Id"
+            {...register('emailId', {
+              required: {
+                value: true,
+               message: mandatoryError
+              }
+            })}
+            error={errors['emailId']}
+            helperText={errors['emailId']?errors['emailId'].message:""}
+            fullWidth
+            autoComplete="family-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="phoneNumber"
+            name="phoneNumber"
+            label="Phone Number"
+            type='number'
+            {...register('phoneNumber', {
+              required: {
+                value: true,
+               message: mandatoryError
+              },
+              pattern:{
+                value: NONZERO_INTEGER_REGEX,
+               message: 'Not valid number'
+              }
+
+            })}
+            error={errors['phoneNumber']}
+            helperText={errors['phoneNumber']?errors['phoneNumber'].message:""}
+            fullWidth
+            autoComplete="shipping address-line1"
+            variant="standard"
+          />
+        </Grid>
+
         <Grid item xs={12}>
           <TextField
             required
