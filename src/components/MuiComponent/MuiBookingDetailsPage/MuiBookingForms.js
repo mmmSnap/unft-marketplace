@@ -3,12 +3,15 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import userInfoForm from './hooks/userInfoForm';
+import SelectAutoComplete from '../formsElement/SelectAutoComplete';
 import { NONZERO_INTEGER_REGEX } from '../../../consts/RegExp';
+import CountryList from '../../../../public/data/countryList.json'
+import CountryCode from  '../../../../public/data/countryCode.json'
 
-const mandatoryError  ='This field is mandatory'
+const mandatoryError = 'This field is mandatory'
 export default function MuiBookingForms(photoGrapherAddress) {
 
-  const { register, formState: { errors } } = userInfoForm()
+  const { register, formState: { errors } ,control} = userInfoForm()
 
   return (
     <React.Fragment>
@@ -26,11 +29,11 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('firstName', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['firstName']}
-            helperText={errors['firstName']?errors['firstName'].message:""}
+            helperText={errors['firstName'] ? errors['firstName'].message : ""}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -45,12 +48,12 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('lastName', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               },
-             
+
             })}
             error={errors['lastName']}
-            helperText={errors['lastName']?errors['lastName'].message:""}
+            helperText={errors['lastName'] ? errors['lastName'].message : ""}
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -65,17 +68,27 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('emailId', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['emailId']}
-            helperText={errors['emailId']?errors['emailId'].message:""}
+            helperText={errors['emailId'] ? errors['emailId'].message : ""}
             fullWidth
             autoComplete="family-name"
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={3}>
+        <SelectAutoComplete
+            options={CountryCode}
+            label={'Country Code'}
+            fieldName="countryCode"
+            control={control}
+            isError={errors['countryCode']}
+            errorMessage={errors['countryCode']?.message||''}
+          />
+        </Grid>
+        <Grid item xs={9}>
           <TextField
             required
             id="phoneNumber"
@@ -85,16 +98,16 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('phoneNumber', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               },
-              pattern:{
+              pattern: {
                 value: NONZERO_INTEGER_REGEX,
-               message: 'Not valid number'
+                message: 'Not valid number'
               }
 
             })}
             error={errors['phoneNumber']}
-            helperText={errors['phoneNumber']?errors['phoneNumber'].message:""}
+            helperText={errors['phoneNumber'] ? errors['phoneNumber'].message : ""}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
@@ -110,11 +123,11 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('address1', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['address1']}
-            helperText={errors['address1']?errors['address1'].message:""}
+            helperText={errors['address1'] ? errors['address1'].message : ""}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
@@ -127,11 +140,11 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('address2', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['address2']}
-            helperText={errors['address2']?errors['address2'].message:""}
+            helperText={errors['address2'] ? errors['address2'].message : ""}
             label="Address line 2"
             fullWidth
             autoComplete="shipping address-line2"
@@ -147,11 +160,11 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('city', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['city']}
-            helperText={errors['city']?errors['city'].message:""}
+            helperText={errors['city'] ? errors['city'].message : ""}
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
@@ -164,11 +177,11 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('state', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['state']}
-            helperText={errors['state']?errors['state'].message:""}
+            helperText={errors['state'] ? errors['state'].message : ""}
             label="State/Province/Region"
             fullWidth
             variant="standard"
@@ -181,11 +194,11 @@ export default function MuiBookingForms(photoGrapherAddress) {
             {...register('pincode', {
               required: {
                 value: true,
-               message: mandatoryError
+                message: mandatoryError
               }
             })}
             error={errors['pincode']}
-            helperText={errors['pincode']?errors['pincode'].message:""}
+            helperText={errors['pincode'] ? errors['pincode'].message : ""}
             name="pincode"
             label="Zip / Postal code"
             fullWidth
@@ -194,7 +207,8 @@ export default function MuiBookingForms(photoGrapherAddress) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+
+          {/* <TextField
             required
             {...register('country', {
               required: {
@@ -210,10 +224,25 @@ export default function MuiBookingForms(photoGrapherAddress) {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+          /> */}
+
+          <SelectAutoComplete
+            options={CountryList}
+            fieldName="country"
+            control={control}
+            isError={errors['country']}
+            errorMessage={errors['country']?.message||''}
           />
         </Grid>
-       
+
       </Grid>
     </React.Fragment>
   );
 }
+
+// required: true,
+// fieldName: COUNTRY_LIST,
+// control,
+// options: CountryList,
+// isError: !!genderError,
+// errorMessage: genderError,

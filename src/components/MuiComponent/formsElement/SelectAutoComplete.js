@@ -4,7 +4,7 @@ import Autocomplete, {createFilterOptions} from "@mui/material/Autocomplete";
 import { Controller } from "react-hook-form";
 
 export default function SelectAutoComplete(props) {
-  const { control, options, fieldName,defaultValue } = props;
+  const { control, options, fieldName,defaultValue,label } = props;
     const apiValue = defaultValue?{ label: defaultValue }:null
   return (
     <Controller
@@ -32,7 +32,7 @@ export default function SelectAutoComplete(props) {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label={fieldName || ""}
+                label={label||fieldName || ""}
                 error={error}
                 helperText={error ? error.message : ""}
                 variant="standard"
