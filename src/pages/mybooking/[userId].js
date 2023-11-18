@@ -1,8 +1,12 @@
+import Layout from "../../components/Layout"
 import MyBookingComponent from "../../components/MuiComponent/PhotoGrapherBooking/MyBookingComponent"
 
-const MyBooking  = ()=>{
+const MyBooking = () => {
 
-    return (<MyBookingComponent  />)
+    return (
+        <Layout>
+            <MyBookingComponent />
+        </Layout>)
 }
 
 export default MyBooking
