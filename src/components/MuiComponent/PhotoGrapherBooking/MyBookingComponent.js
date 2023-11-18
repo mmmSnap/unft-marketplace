@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import TabComponent from "../MuiTableComponent/TabComponent";
 import axios from "axios";
 import eventStatus from "../../../utils/eventStatus";
+import { axionInstace } from "../../../globalServices/axionInstace";
 
 const MyBookingComponent = () => {
   const [bookingList, setBookingList] = useState([]);
@@ -12,8 +13,8 @@ const MyBookingComponent = () => {
   const [completedBooking, setCompletedBooking] = useState([]);
   const [isLoading,setIsLoading]  = useState(true)
   React.useEffect(() => {
-    axios
-      .get("/api/booking")
+    axionInstace
+      .get("/booking")
       .then((response) => {
         const bookingListItems = response?.data?.items;
         const comingBooking = [];
