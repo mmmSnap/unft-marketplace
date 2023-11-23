@@ -1,6 +1,4 @@
-import Cors from 'cors';
 import {Deta} from "deta";
-
 
 export async function searchPhotographers(query) {
     query = query || "";
@@ -18,9 +16,10 @@ export async function searchPhotographers(query) {
     let filtered = items;
 
     query.trim().split(" ").forEach(q => {
-            filtered = filtered.filter(item => item.name?.toLowerCase().startsWith(q.toLowerCase()) ||
-                item.address?.toLowerCase().includes(q.toLowerCase()) ||
-                item.phone?.toLowerCase().startsWith(q.toLowerCase())
+            filtered = filtered.filter(item =>
+              item.name?.toLowerCase().startsWith(q.toLowerCase()) ||
+              item.address?.toLowerCase().includes(q.toLowerCase()) ||
+              item.phone?.toLowerCase().startsWith(q.toLowerCase())
             );
         }
     );
@@ -32,34 +31,9 @@ export async function searchPhotographers(query) {
     };
 }
 
-const cors = Cors({
-    methods: ['GET', 'PATCH', 'POST'],
-})
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-export function runMiddleware(
-    req,
-    res
-) {
-    return new Promise((resolve, reject) => {
-        cors(req, res, (result) => {
-            if (result instanceof Error) {
-                return reject(result)
-            }
-
-            return resolve(result)
-        })
-    })
-}
-
 export default async function handler(
     req,
     res
 ) {
-    // Run the middleware
-    await runMiddleware(req, res)
-
-    // Rest of the API logic
     res.status(200).json(await searchPhotographers(req.query.query))
 }

@@ -1,6 +1,4 @@
 import {Deta} from "deta";
-import {runMiddleware} from "./v1/search";
-
 
 export async function searchPhotographers(query) {
     if (query === undefined || query === null || query.trim().length === 0) return {count: 0, items: [], next: null};
@@ -74,9 +72,5 @@ export default async function handler(
     req,
     res
 ) {
-    // Run the middleware
-    await runMiddleware(req, res)
-
-    // Rest of the API logic
     res.status(200).json(await searchPhotographers(req.query.query))
 }

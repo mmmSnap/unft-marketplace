@@ -1,7 +1,6 @@
 import {Deta} from "deta";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "../auth/[...nextauth]";
-import {runMiddleware} from "../v1/search";
 
 export async function GetBookingDetails(key){
     const deta = Deta(process.env.DETA_PROJECT_KEY);
@@ -10,8 +9,6 @@ export async function GetBookingDetails(key){
     return booking
 }   
 export default async function handler(req, res) {
-    await runMiddleware(req, res);
-
     const deta = Deta(process.env.DETA_PROJECT_KEY);
     const bookings_database = deta.Base(process.env.BOOKINGS_TABLE_NAME);
 

@@ -2,7 +2,7 @@ import {Deta} from "deta";
 import {authOptions} from "./auth/[...nextauth]";
 import {getServerSession} from "next-auth/next";
 import {fetchUserDetailsFromGoogle} from "../../services/googleUserService";
-import {DATE_OF_BIRTH, FIRST_NAME, GENDER, LAST_NAME,} from "../../component/const/constFile";
+import {DATE_OF_BIRTH, FIRST_NAME, GENDER, LAST_NAME,} from "../../consts/constFile";
 import {faker} from "@faker-js/faker/locale/en_IND";
 import sendEmail from "./sendgrid";
 

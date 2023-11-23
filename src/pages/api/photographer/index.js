@@ -1,7 +1,6 @@
 import { Deta } from "deta";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import {runMiddleware} from "../v1/search";
 
 export async function getPhotographer(email) {
   const deta = Deta(process.env.DETA_PROJECT_KEY);
@@ -26,8 +25,6 @@ export async function updateAlbum(key, album) {
 }
 
 export default async function handler(req, res) {
-  await runMiddleware(req, res);
-
   let session = await getServerSession(req, res, authOptions);
 
   switch (req.method) {
