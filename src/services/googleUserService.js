@@ -18,7 +18,7 @@ import {
     PRICE_VALUE,
     SKILLS,
     STATE
-} from "../component/const/constFile";
+} from "../consts/constFile";
 
 export function fetchUserDetailsFromGoogle(given_session) {
     let accessToken;
