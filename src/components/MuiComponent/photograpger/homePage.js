@@ -27,7 +27,7 @@ const PhotographerHomeComponent = () => {
     function updateImageList(newImage) {
         setImageList((previousImageList) => {
             previousImageList.push(newImage);
-            axionInstace.patch('/api/photographer', previousImageList).then(console.log);
+            axionInstace.patch('/photographer', previousImageList).then(console.log);
             return [...previousImageList]
         });
     }
@@ -80,7 +80,7 @@ const PhotographerHomeComponent = () => {
     const handleRemove = ({id}) => {
         const newListItem = imageList.filter((item) => !(item.id === id))
         setImageList([...newListItem]);
-        axios.patch('/api/photographer', newListItem)
+        axios.patch('/photographer', newListItem)
     }
     return (
         <>
