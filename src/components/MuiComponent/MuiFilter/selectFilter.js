@@ -50,6 +50,7 @@ export default function SelectValueOnChange(props) {
               <TextField
                 {...params}
                 label={fieldName}
+                variant= "standard"
                 placeholder="Select your skills"
                 error={error}
                 helperText={error ? error.message : ""}

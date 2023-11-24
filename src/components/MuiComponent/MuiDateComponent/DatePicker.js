@@ -21,20 +21,26 @@ export default function BasicDatePicker(props) {
 
                 },
                 pattern: {
-                  value:/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-                  message: "Invalid Date ",
+                    value: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+                    message: "Invalid Date ",
 
                 }
             }}
-            render={({ field, fieldState: { error } }) => {
+            render={({ field, fieldState: { error } ,}) => {
                 const { value } = field
+
                 return (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
-                            slotProps={{ textField: { variant: "standard" } }}
+                            slotProps={{
+                                textField: { variant: "standard", helperText: error ? error.message : '' },
+
+                            }}
+                            
                             label={label}
                             value={dayjs(new Date(value))}
                             minDate={dayjs(new Date())}
+
                             onChange={(newValue) => field.onChange(newValue)}
                         />
 

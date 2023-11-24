@@ -29,7 +29,7 @@ import {
 } from "../GlobalConst/consts";
 import MuiLoader from '../components/MuiComponent/MuiLoader/MuiLoader'
 import MediaCard from '../components/MuiComponent/MuiCard/card'
-import searchData from '../GlobalConst/search.json'
+import MuiDateComponent from '../components/MuiComponent/MuiDateComponent/MuiDateComponent'
 
 const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
@@ -238,6 +238,9 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
               <div className={styles.form}>
                 <div className={styles.label}>Search keyword</div>
                 <MuiSearchComponent search={search} setSearch={setSearch} getPhotGrapherDeatisl={getPhotGrapherDeatisl} />
+                <div>
+                <MuiDateComponent colSize={12}  />
+                </div>
               </div>
               <div className={styles.label}>Filter</div>
               <Divider color="primary" textAlign='left' />

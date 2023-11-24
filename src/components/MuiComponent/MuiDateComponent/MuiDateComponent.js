@@ -8,7 +8,9 @@ import BasicDatePicker from "./DatePicker";
 const START_DATE = 'start-date'
 const END_DATE = 'end-date'
 
-export const MuiDateComponent = () => {
+export const MuiDateComponent = (props) => {
+
+    const {colSize=6, mt=2} = props
 
     const form = useForm({
         mode: "onBlur",
@@ -40,9 +42,10 @@ export const MuiDateComponent = () => {
     return (
         <Grid
             container
-            spacing={1}
+            spacing={2}
+            sx={{mt}}
         >
-            <Grid item xs={6} spacing={1}>
+            <Grid item xs={colSize} spacing={1}>
                 <BasicDatePicker
                     {...fieldsForm[START_DATE]}
                     label={"Start date"}
@@ -50,7 +53,7 @@ export const MuiDateComponent = () => {
                     minDate={new Date()}
                 />
             </Grid>
-            <Grid item xs={6} spacing={1}>
+            <Grid item xs={colSize} spacing={1}>
                 <BasicDatePicker
                     {...fieldsForm[END_DATE]}
                     label={"End date"}
