@@ -1,25 +1,21 @@
 
+import moment from "moment";
 import { Grid } from "@mui/material"
 import {useForm} from "react-hook-form";
 import { useState } from "react";
 import BasicDatePicker from "./DatePicker";
-
 
 const START_DATE = 'start-date'
 const END_DATE = 'end-date'
 
 export const MuiDateComponent = () => {
 
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-
-     
     const form = useForm({
         mode: "onBlur",
-        // defaultValues: {
-        //     [START_DATE]: '' || "",
-        //     [END_DATE]: '' || ""
-        // },
+        defaultValues: {
+            [START_DATE]:  moment(new Date()).format('MM/DD/YYYY'),
+            [END_DATE]:  moment(new Date())
+        },
     });
     const {
         register,

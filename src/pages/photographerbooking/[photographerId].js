@@ -19,12 +19,23 @@ import BookingConfirm from '../../components/MuiComponent/MuiBookingDetailsPage/
 import MuiBookingForms from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingForms';
 import { getSinglePhotoGrapher } from '../../globalServices/getPhotoGrapherDetails';
 import PhotoGrapherAddress from '../../components/MuiComponent/MuiBookingDetailsPage/PhotoGrapherAddress';
+import BasicDatePicker from '../../components/MuiComponent/formsElement/DatePickerLocal';
+import { useForm } from 'react-hook-form';
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
+import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent';
+// import DatePickerValue from '../../components/MuiComponent/New/DateComp';
+
+
 function getStepContent(step, photoGrapherAddress, type) {
-  
+
   switch (step) {
     case 0:
-      return  type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} /> : <MuiBookingForms photoGrapherAddress={photoGrapherAddress} /> ;
+      return (
+        <>
+        <MuiDateComponent />
+        {type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} /> : <MuiBookingForms photoGrapherAddress={photoGrapherAddress} />}
+        </>
+        );
     case 1:
       return <ReviewDetails />;
     case 2:
@@ -38,9 +49,11 @@ export default function PhotograherBookingPage() {
   const [addressType, setAddressType] = React.useState('Studio Address')
   const router = useRouter()
   const [photoGrapherAddress, setPhotoGrapherAddress] = React.useState({})
-  const { photographerId } = router.query
-
+  
+  
   React.useEffect(() => {
+    const { photographerId } = router.query
+    console.log('router',photographerId)
     getSinglePhotoGrapher(photographerId)
       .then((response) => {
         setPhotoGrapherAddress(response)
@@ -79,8 +92,8 @@ export default function PhotograherBookingPage() {
               name="row-radio-buttons-group"
               defaultValue={addressType}
             >
-              <FormControlLabel  value="Studio Address" onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Studio Address" />
-              <FormControlLabel   value="Personal Address"  onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Personal Address" />
+              <FormControlLabel value="Studio Address" onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Studio Address" />
+              <FormControlLabel value="Personal Address" onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Personal Address" />
 
             </RadioGroup>
           </FormControl>
@@ -120,3 +133,11 @@ export default function PhotograherBookingPage() {
     </Layout>
   )
 }
+
+// export async function getServerSideProps(context) {
+//   const { searchText, startDate, endDate } = context.query;
+  
+//   return {
+//     props: { startDate: '', endDate:'',  },
+//   };
+// }

@@ -11,12 +11,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
-const PhotoGrapherAddress = ({photoGrapherAddress}) => {
-  console.log('photoGrapherAddress',photoGrapherAddress)
+const PhotoGrapherAddress = ({ photoGrapherAddress }) => {
 
     return (<React.Fragment>
         <Typography variant="h6" gutterBottom>
-            Photographer or studio address
+           
         </Typography>
 
         <Grid container spacing={3}>
@@ -28,6 +27,11 @@ const PhotoGrapherAddress = ({photoGrapherAddress}) => {
                     {'mojahid'}
                 </Typography> */}
                 <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell colSpan={2}> Photographer or studio address</TableCell>
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         <TableRow>
                             <TableCell component="th" scope="row" width={'35%'}>
@@ -39,13 +43,13 @@ const PhotoGrapherAddress = ({photoGrapherAddress}) => {
                             <TableCell component="th" scope="row">
                                 {'Email ID'}
                             </TableCell>
-                            <TableCell align="left">{photoGrapherAddress?.address||''}</TableCell>
+                            <TableCell align="left">{photoGrapherAddress?.address || ''}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell component="th" scope="row">
                                 {'Flat House No'}
                             </TableCell>
-                            <TableCell align="left">{photoGrapherAddress?.address||''}</TableCell>
+                            <TableCell align="left">{photoGrapherAddress?.address || ''}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell component="th" scope="row">
