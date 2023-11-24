@@ -3,17 +3,15 @@ import Image from "next/image";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import { useRouter } from 'next/router'
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-// import CardStepperImage from "./index";
+import { useSearchContextValue } from "../../../ContextConfig/SeacrhContext";
 
-
-export default function MediaCard({ name, items }) {
+export default function MediaCard({ name, items ,bookNowHandler}) {
   const router = useRouter()
-
+  const { searchDate } = useSearchContextValue()
   let images = [
     {
       src: "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60"
@@ -30,9 +28,15 @@ export default function MediaCard({ name, items }) {
   ];
   images = items?.images?.filter((item) => item !== "" || item !== null || true).map((item) => { return { src: item } }) || images;
   images = images.length > 3 ? images.slice(0, 3) : images;
-    const bookNowHandler = (key)=>{
-      router.push(`/photographerbooking/${key}`)
-    }
+  // const bookNowHandler = (key) => {
+  //   console.log('searchDate',searchDate)
+  //   router.push(`/photographerbooking/${key}`,{
+  //     query: {
+  //       startDate:searchDate.startDate,
+  //       endDate:searchDate.endDate,
+  //   },
+  //   })
+  // }
   const image = images[0]
 
   if (!image.src) {
@@ -46,7 +50,7 @@ export default function MediaCard({ name, items }) {
             alt="Picture of the author"
             width={image?.width || 360}
             height={image?.height || 250}
-            />)}
+          />)}
         </div>
 
         <Typography variant="h6" component="div" sx={{ textAlign: 'left', marginLeft: "10px" }} >

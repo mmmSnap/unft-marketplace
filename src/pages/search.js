@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Grid } from '@mui/material'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
@@ -10,8 +10,6 @@ import MuiSearchComponent from '../components/MuiComponent/MuiSearchComponent/Mu
 import MuiChip from '../components/MuiComponent/MuiChip/MuiChip'
 import Layout from '../components/Layout'
 import Divider from '@mui/material/Divider';
-import Card from '../components/Card'
-import Dropdown from '../components/Dropdown'
 import priceRange from '../utils/constants/priceRange'
 import handleQueryParams from '../utils/queryParams'
 import { OPTIONS } from '../utils/constants/appConstants'
@@ -30,6 +28,8 @@ import {
 import MuiLoader from '../components/MuiComponent/MuiLoader/MuiLoader'
 import MediaCard from '../components/MuiComponent/MuiCard/card'
 import MuiDateComponent from '../components/MuiComponent/MuiDateComponent/MuiDateComponent'
+import { SeacrhContext ,useSearchContextValue} from '../ContextConfig/SeacrhContext'
+
 
 const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
@@ -41,10 +41,12 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     categoryData?.length ? categoryData : []
   )
 
+
   const categoriesTypeData = categoriesGroup['type'] || categories['type']
   const [search, setSearch] = useState('')
   const debouncedSearchTerm = useDebounce(search, 600)
-
+  const {searchDate} = useSearchContextValue()
+  const router = useRouter()
   function intersect(a, b) {
     return !!a.filter(Set.prototype.has, new Set(b)).length;
   }
@@ -218,6 +220,16 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   }
 
 
+  const handleBookPhotoGrapher = (key)=>{
+
+    router.push(`/photographerbooking/${key}`,{
+      query: {
+        startDate:searchDate.startDate,
+        endDate:searchDate.endDate,
+    },
+    })
+  }
+
 
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata}>
@@ -227,6 +239,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
           'uNFT Marketplace built with Cosmic CMS, Next.js, and the Stripe API'
         }
       />
+      <SeacrhContext.Provider value={searchDate}>
       <div className={cn('section-pt80', styles.section)}>
         <div className={cn('container', styles.container)}>
           <div className={styles.row}>
@@ -239,7 +252,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                 <div className={styles.label}>Search keyword</div>
                 <MuiSearchComponent search={search} setSearch={setSearch} getPhotGrapherDeatisl={getPhotGrapherDeatisl} />
                 <div>
-                <MuiDateComponent colSize={12}  />
+                  <MuiDateComponent colSize={12} />
                 </div>
               </div>
               <div className={styles.label}>Filter</div>
@@ -259,26 +272,6 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
             <div className={styles.wrapper}>
               <div className={styles.nav}>
                 <MuiChip setChipList={handleSelectChip} chipList={chipList} />
-                {/* <button
-                  className={cn(styles.link, {
-                    [styles.active]: '' === activeIndex,
-                  })}
-                  onClick={() => handleCategoryChange('')}
-                >
-                  All
-                </button>
-                {categoriesTypeData &&
-                  Object.entries(categoriesTypeData)?.map((item, index) => (
-                    <button
-                      className={cn(styles.link, {
-                        [styles.active]: item[0] === activeIndex,
-                      })}
-                      onClick={() => handleCategoryChange(item[0])}
-                      key={index}
-                    >
-                      {item[1]}
-                    </button>
-                  ))} */}
 
               </div>
               <div className={styles.list}>
@@ -296,7 +289,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                     updateList?.map((x, index) => (
                       // <Card className={styles.card} item={x} key={index} />
                       <Grid item xs={4} md={4} key={index}>
-                        <MediaCard items={x} bookNowHandler={() => { }} />
+                        <MediaCard items={x} bookNowHandler={handleBookPhotoGrapher} />
                       </Grid>
 
                     ))
@@ -308,6 +301,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
           </div>
         </div>
       </div>
+      </SeacrhContext.Provider>
     </Layout>
   )
 }

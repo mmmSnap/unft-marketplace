@@ -6,10 +6,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Controller } from "react-hook-form";
-
+import { useSearchContextValue } from "../../../ContextConfig/SeacrhContext";
 export default function BasicDatePicker(props) {
-    //   const [currentDate, setCurrentDate] = React.useState(moment().format("YYYY-MM-DD"));
+
     const { control, fieldName, label, size = "large", minDate, ...rest } = props;
+    const { setSearchDate } = useSearchContextValue()
     return (
         <Controller
             control={control}
@@ -26,7 +27,7 @@ export default function BasicDatePicker(props) {
 
                 }
             }}
-            render={({ field, fieldState: { error } ,}) => {
+            render={({ field, fieldState: { error }, }) => {
                 const { value } = field
 
                 return (
@@ -36,12 +37,18 @@ export default function BasicDatePicker(props) {
                                 textField: { variant: "standard", helperText: error ? error.message : '' },
 
                             }}
-                            
+
                             label={label}
                             value={dayjs(new Date(value))}
                             minDate={dayjs(new Date())}
 
-                            onChange={(newValue) => field.onChange(newValue)}
+                            onChange={(newValue) => {
+                                setSearchDate((props) => ({
+                                    ...props,
+                                    [fieldName]: newValue
+                                }))
+                                field.onChange(newValue)
+                            }}
                         />
 
                     </LocalizationProvider>
