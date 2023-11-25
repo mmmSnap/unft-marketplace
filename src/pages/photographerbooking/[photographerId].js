@@ -50,21 +50,24 @@ export default function PhotograherBookingPage() {
   const router = useRouter()
   const [photoGrapherAddress, setPhotoGrapherAddress] = React.useState({})
   
-  const {startDate,endDate} =  router.query
+  const {startDate,endDate,photographerId} =  router.query
   const defaultDate = {
     startDate,
-    endDate
+    endDate,
+    
   }
-  const {fieldsForm} = useMuiDateHook(defaultDate)
   
   React.useEffect(() => {
-    const { photographerId } = router.query
-    console.log('router',photographerId)
-    getSinglePhotoGrapher(photographerId)
+    console.log('photographerId',photographerId)
+    if(photographerId){
+      getSinglePhotoGrapher(photographerId)
       .then((response) => {
         setPhotoGrapherAddress(response)
       })
-  }, [])
+    }
+  }, [photographerId])
+  const {fieldsForm} = useMuiDateHook(defaultDate)
+
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
