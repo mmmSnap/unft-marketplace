@@ -39,7 +39,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { data: searchResult, fetchData } = useFetchData(
     categoryData?.length ? categoryData : []
   )
-  const {fieldsForm,form}  = useMuiDateHook()
+  const {fieldsForm,form}  = useMuiDateHook({})
 
   const categoriesTypeData = categoriesGroup['type'] || categories['type']
   const [search, setSearch] = useState('')
