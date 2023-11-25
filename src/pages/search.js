@@ -28,8 +28,7 @@ import {
 import MuiLoader from '../components/MuiComponent/MuiLoader/MuiLoader'
 import MediaCard from '../components/MuiComponent/MuiCard/card'
 import MuiDateComponent from '../components/MuiComponent/MuiDateComponent/MuiDateComponent'
-import { SeacrhContext ,useSearchContextValue} from '../ContextConfig/SeacrhContext'
-
+import useMuiDateHook from '../components/MuiComponent/MuiDateComponent/useMuiDateHook'
 
 const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { query, push } = useRouter()
@@ -40,13 +39,13 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
   const { data: searchResult, fetchData } = useFetchData(
     categoryData?.length ? categoryData : []
   )
-
+  const {fieldsForm,form}  = useMuiDateHook()
 
   const categoriesTypeData = categoriesGroup['type'] || categories['type']
   const [search, setSearch] = useState('')
   const debouncedSearchTerm = useDebounce(search, 600)
-  const {searchDate} = useSearchContextValue()
   const router = useRouter()
+
   function intersect(a, b) {
     return !!a.filter(Set.prototype.has, new Set(b)).length;
   }
@@ -69,25 +68,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     setChipList([...updatedList])
   }
 
-  const [{ min, max }, setRangeValues] = useState(
-    query['min'] || query['max']
-      ? { min: query['min'] || 1, max: query['max'] || 100000 }
-      : priceRange
-  )
-  const debouncedMinTerm = useDebounce(min, 600)
-  const debouncedMaxTerm = useDebounce(max, 600)
-
-  const [activeIndex, setActiveIndex] = useState(
-    query['category'] || ''
-  )
-  const [option, setOption] = useState(query['color'] || OPTIONS[0])
-
-  const handleChange = ({ target: { name, value } }) => {
-    setRangeValues(prevFields => ({
-      ...prevFields,
-      [name]: value,
-    }))
-  }
+  
 
   const filterData = (listData, filterType) => {
     const gender = listData;
@@ -155,77 +136,16 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
   }, [])
 
-  const handleFilterDataByParams = useCallback(
-    async ({
-      category = activeIndex,
-      color = option,
-      min = debouncedMinTerm,
-      max = debouncedMaxTerm,
-      search = debouncedSearchTerm,
-    }) => {
-      const params = handleQueryParams({
-        category,
-        color,
-        min: min.trim(),
-        max: max.trim(),
-        search: search.toLowerCase().trim(),
-      })
-
-      push(
-        {
-          pathname: '/search',
-          query: params,
-        },
-        undefined,
-        { shallow: true }
-      )
-
-      const filterParam = Object.keys(params).reduce(
-        (acc, key) => acc + `&${key}=` + `${params[key]}`,
-        ''
-      )
-
-      await fetchData(`/api/filter?${filterParam}`)
-    },
-    [
-      activeIndex,
-      debouncedSearchTerm,
-      debouncedMinTerm,
-      debouncedMaxTerm,
-      fetchData,
-      option,
-      push,
-    ]
-  )
-
-  const getDataByFilterOptions = useCallback(
-    async color => {
-      setOption(color)
-      handleFilterDataByParams({ color })
-    },
-    [handleFilterDataByParams]
-  )
-
-  const handleCategoryChange = useCallback(
-    async category => {
-      setActiveIndex(category)
-      handleFilterDataByParams({ category })
-    },
-    [handleFilterDataByParams]
-  )
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    handleFilterDataByParams({ search: debouncedSearchTerm })
-  }
+ 
 
   const handleBookPhotoGrapher = (key)=>{
-   
+   const {getValues} = form
+   const dateValue = getValues()
     router.push({
      pathname: `/photographerbooking/${key}`,
      query:{
-      startDate: searchDate.startDate.toString() ,
-      endDate: searchDate.endDate.toString(),
+      startDate: dateValue.startDate.toString() ,
+      endDate: dateValue.endDate.toString(),
      }
     })
   }
@@ -239,7 +159,6 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
           'uNFT Marketplace built with Cosmic CMS, Next.js, and the Stripe API'
         }
       />
-      <SeacrhContext.Provider value={searchDate}>
       <div className={cn('section-pt80', styles.section)}>
         <div className={cn('container', styles.container)}>
           <div className={styles.row}>
@@ -252,7 +171,7 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
                 <div className={styles.label}>Search keyword</div>
                 <MuiSearchComponent search={search} setSearch={setSearch} getPhotGrapherDeatisl={getPhotGrapherDeatisl} />
                 <div>
-                  <MuiDateComponent colSize={12} />
+                  <MuiDateComponent colSize={12} fieldsForm={fieldsForm} />
                 </div>
               </div>
               <div className={styles.label}>Filter</div>
@@ -301,7 +220,6 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
           </div>
         </div>
       </div>
-      </SeacrhContext.Provider>
     </Layout>
   )
 }

@@ -7,11 +7,9 @@ import { useRouter } from 'next/router'
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useSearchContextValue } from "../../../ContextConfig/SeacrhContext";
 
 export default function MediaCard({ name, items ,bookNowHandler}) {
   const router = useRouter()
-  const { searchDate } = useSearchContextValue()
   let images = [
     {
       src: "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60"

@@ -5,39 +5,14 @@ import {useForm} from "react-hook-form";
 import { useState } from "react";
 import BasicDatePicker from "./DatePicker";
 
-const START_DATE = 'start-date'
-const END_DATE = 'end-date'
+const START_DATE = 'startDate'
+const END_DATE = 'endDate'
 
 export const MuiDateComponent = (props) => {
 
-    const {colSize=6, mt=2} = props
+    const {colSize=6, mt=2,fieldsForm} = props
 
-    const form = useForm({
-        mode: "onBlur",
-        defaultValues: {
-            [START_DATE]:  moment(new Date()).format('MM/DD/YYYY'),
-            [END_DATE]:  moment(new Date())
-        },
-    });
-    const {
-        register,
-        control,
-        getValues,
-        formState: {errors},
-    } = form;
-    const fieldsForm = {
-       
-        [START_DATE]: {
-            require,
-            fieldName: START_DATE,
-            control,
-        },
-        [END_DATE]: {
-            require,
-            fieldName: END_DATE,
-            control,
-        },
-    };
+
 
     return (
         <Grid

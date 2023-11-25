@@ -23,16 +23,16 @@ import BasicDatePicker from '../../components/MuiComponent/formsElement/DatePick
 import { useForm } from 'react-hook-form';
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
 import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent';
-// import DatePickerValue from '../../components/MuiComponent/New/DateComp';
+import useMuiDateHook from '../../components/MuiComponent/MuiDateComponent/useMuiDateHook';
 
-
-function getStepContent(step, photoGrapherAddress, type) {
-
+function getStepContent(step, photoGrapherAddress, type,fieldsForm) {
+  
+ 
   switch (step) {
     case 0:
       return (
         <>
-        <MuiDateComponent />
+        <MuiDateComponent fieldsForm={fieldsForm} />
         {type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} /> : <MuiBookingForms photoGrapherAddress={photoGrapherAddress} />}
         </>
         );
@@ -50,6 +50,12 @@ export default function PhotograherBookingPage() {
   const router = useRouter()
   const [photoGrapherAddress, setPhotoGrapherAddress] = React.useState({})
   
+  const {startDate,endDate} =  router.query
+  const defaultDate = {
+    startDate,
+    endDate
+  }
+  const {fieldsForm} = useMuiDateHook(defaultDate)
   
   React.useEffect(() => {
     const { photographerId } = router.query
@@ -110,7 +116,7 @@ export default function PhotograherBookingPage() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep, photoGrapherAddress, addressType)}
+              {getStepContent(activeStep, photoGrapherAddress, addressType,fieldsForm)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
