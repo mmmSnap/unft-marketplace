@@ -67,7 +67,7 @@ export default function MediaCard({ name, items ,bookNowHandler}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" onClick={() => bookNowHandler(items.key)}>Book Now</Button>
+        <Button type="button" variant="outlined" onClick={() => bookNowHandler(items.key)}>Book Now</Button>
       </CardActions>
     </Card>
   );

@@ -219,14 +219,14 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
     handleFilterDataByParams({ search: debouncedSearchTerm })
   }
 
-
   const handleBookPhotoGrapher = (key)=>{
-
-    router.push(`/photographerbooking/${key}`,{
-      query: {
-        startDate:searchDate.startDate,
-        endDate:searchDate.endDate,
-    },
+   
+    router.push({
+     pathname: `/photographerbooking/${key}`,
+     query:{
+      startDate: searchDate.startDate.toString() ,
+      endDate: searchDate.endDate.toString(),
+     }
     })
   }
 
