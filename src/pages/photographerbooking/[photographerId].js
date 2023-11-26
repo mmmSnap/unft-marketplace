@@ -62,7 +62,6 @@ export default function PhotograherBookingPage() {
   }
   
   React.useEffect(() => {
-    console.log('photographerId',photographerId)
     if(photographerId){
       getSinglePhotoGrapher(photographerId)
       .then((response) => {
@@ -72,14 +71,20 @@ export default function PhotograherBookingPage() {
   }, [photographerId])
   const {fieldsForm} = useMuiDateHook(defaultDate)
 
-
+   const submit = (data)=>{
+       if(data){
+        setUserAddress(data)
+        setActiveStep(activeStep + 1);
+       }
+   }
+  
   const handleNext = () => {
-    const data = myRef.current.handleFormSubmit()
-    if(data){
-      setUserAddress(data)
-      setActiveStep(activeStep + 1);
-    } 
-    // 
+    if(addressType==='Studio Address'){
+      etActiveStep(activeStep + 1);
+    }else{
+      const handleSubmit = myRef.current.handleFormSubmit()
+   handleSubmit(submit)()
+    }
   };
 
   const handleBack = () => {

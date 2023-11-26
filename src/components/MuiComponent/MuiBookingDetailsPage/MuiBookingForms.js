@@ -12,16 +12,14 @@ import CountryCode from  '../../../../public/data/countryCode.json'
 const mandatoryError = 'This field is mandatory'
 
 const MuiBookingForms = React.forwardRef(({userAddress},ref)=> {
-
- const form = userInfoForm(userAddress)
+   const form = userInfoForm(userAddress)
  const { register, formState: { errors } ,control,handleSubmit}  =form
 
  React.useImperativeHandle(ref, () => ({
   handleFormSubmit() {
-    handleSubmit(onSubmit)()
+   return handleSubmit
   }
 }))
-const onSubmit  =(data)=>data
   
 
   return (
@@ -30,7 +28,7 @@ const onSubmit  =(data)=>data
         Shipping address
       </Typography>
       <FormProvider {...form}>
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <form >
       <Grid container spacing={3}>
     
         <Grid item xs={12} sm={6}>
