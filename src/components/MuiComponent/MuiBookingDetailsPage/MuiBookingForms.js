@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { FormProvider } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import userInfoForm from './hooks/userInfoForm';
 import SelectAutoComplete from '../formsElement/SelectAutoComplete';
@@ -9,17 +10,25 @@ import CountryList from '../../../../public/data/countryList.json'
 import CountryCode from  '../../../../public/data/countryCode.json'
 
 const mandatoryError = 'This field is mandatory'
+
 export default function MuiBookingForms(photoGrapherAddress) {
 
-  const { register, formState: { errors } ,control} = userInfoForm()
+ const form = userInfoForm()
+ const { register, formState: { errors } ,control,handleSubmit}  =form
+
+  const handleFormSubmit = (formDat)=>{
+
+  }
 
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-
+      <FormProvider {...form}>
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Grid container spacing={3}>
+    
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -234,8 +243,10 @@ export default function MuiBookingForms(photoGrapherAddress) {
             errorMessage={errors['country']?.message||''}
           />
         </Grid>
-
-      </Grid>
+        </Grid>
+       </form>
+       </FormProvider>
+      
     </React.Fragment>
   );
 }

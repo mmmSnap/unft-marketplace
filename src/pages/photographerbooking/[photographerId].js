@@ -93,7 +93,7 @@ export default function PhotograherBookingPage() {
               </Step>
             ))}
           </Stepper>
-          <FormControl>
+          {activeStep===0&&(<FormControl>
             <FormLabel id="demo-row-radio-buttons-group-label">Address Type</FormLabel>
             <RadioGroup
               row
@@ -105,7 +105,7 @@ export default function PhotograherBookingPage() {
               <FormControlLabel value="Personal Address" onChange={(e) => setAddressType(e.target.value)} control={<Radio />} label="Personal Address" />
 
             </RadioGroup>
-          </FormControl>
+          </FormControl>)}
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
