@@ -2,10 +2,13 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 
-const UserInfoForm = ()=>{
+const UserInfoForm = (userAddress)=>{
 
     const form = useForm({
         mode: "onBlur",
+        defaultValues:{
+          ...userAddress
+        }
     });
    return form
 }

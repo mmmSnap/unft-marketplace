@@ -11,14 +11,18 @@ import CountryCode from  '../../../../public/data/countryCode.json'
 
 const mandatoryError = 'This field is mandatory'
 
-export default function MuiBookingForms(photoGrapherAddress) {
+const MuiBookingForms = React.forwardRef(({userAddress},ref)=> {
 
- const form = userInfoForm()
+ const form = userInfoForm(userAddress)
  const { register, formState: { errors } ,control,handleSubmit}  =form
 
-  const handleFormSubmit = (formDat)=>{
-
+ React.useImperativeHandle(ref, () => ({
+  handleFormSubmit() {
+    handleSubmit(onSubmit)()
   }
+}))
+const onSubmit  =(data)=>data
+  
 
   return (
     <React.Fragment>
@@ -249,7 +253,9 @@ export default function MuiBookingForms(photoGrapherAddress) {
       
     </React.Fragment>
   );
-}
+})
+
+export default MuiBookingForms
 
 // required: true,
 // fieldName: COUNTRY_LIST,
