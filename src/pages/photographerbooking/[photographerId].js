@@ -80,7 +80,7 @@ export default function PhotograherBookingPage() {
   
   const handleNext = () => {
     if(addressType==='Studio Address'){
-      etActiveStep(activeStep + 1);
+      setActiveStep(activeStep + 1);
     }else{
       const handleSubmit = myRef.current.handleFormSubmit()
    handleSubmit(submit)()
