@@ -38,7 +38,10 @@ function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAdd
         </>
         );
     case 1:
-      return <MuiBookingReviewForm userAddress={userAddress} />;
+     
+       return(
+         type === 'Studio Address' ?<PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} />:<MuiBookingReviewForm userAddress={userAddress} />
+       )
     case 2:
       return <BookingConfirm />;
     default:
