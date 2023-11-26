@@ -12,6 +12,7 @@ import Image from '../../components/Image'
 import Loader from '../../components/Loader'
 import { useRouter } from 'next/router'
 import GridImage from '../../components/MuiComponent/GridImage/GridImage'
+import useMuiDateHook from '../../components/MuiComponent/MuiDateComponent/useMuiDateHook';
 import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent'
 import {
     getDataBySlug,
@@ -25,7 +26,7 @@ import styles from '../../styles/pages/Item.module.sass'
 const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
     const { onAdd, cartItems, cosmicUser } = useStateContext()
     const [photographerDetails, setPhotographerDetails] = React.useState({})
-    const [imageList,setImageList] = React.useState([])
+    const [imageList, setImageList] = React.useState([])
     const [activeIndex, setActiveIndex] = useState(0)
     const [visibleAuthModal, setVisibleAuthModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -40,15 +41,22 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
         cosmicUser?.hasOwnProperty('id') ? handleCheckout() : handleOAuth()
     }
     const router = useRouter()
+    const { startDate, endDate, photographerId } = router.query
+    const defaultDate = {
+        startDate,
+        endDate,
 
-    const { photographerId } = router.query
+    }
+    const { fieldsForm, form } = useMuiDateHook(defaultDate)
+
+
 
     React.useEffect(() => {
         getSinglePhotoGrapher(photographerId).then((data) => {
-            const imagesList = data.images.map((image)=>{
+            const imagesList = data.images.map((image) => {
                 return {
-                    src: image||"https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-                    original: image||"https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
+                    src: image || "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
+                    original: image || "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
                     width: 320,
                     height: 212,
                     caption: data.name,
@@ -90,6 +98,18 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
 
             stripe.redirectToCheckout({ sessionId: data.id })
         }
+    }
+
+    const handleBookPhotoGrapher = (key) => {
+        const { getValues } = form
+        const dateValue = getValues()
+        router.push({
+            pathname: `/photographerbooking/${key}`,
+            query: {
+                startDate: dateValue.startDate.toString(),
+                endDate: dateValue.endDate.toString(),
+            }
+        })
     }
 
     if (isLoading) {
@@ -148,14 +168,14 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                         </div>
 
                         <div className={styles.info}>
-                            <MuiDateComponent />
+                            <MuiDateComponent fieldsForm={fieldsForm} />
                         </div>
                         <div className={styles.actions}>
 
                             <div className={styles.btns}>
                                 <button
                                     className={cn('button', styles.button)}
-                                    onClick={handleAddToCart}
+                                    onClick={handleBookPhotoGrapher}
                                 >
                                     Book Now
                                 </button>
@@ -165,8 +185,8 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                 </div>
                 <GridImage images={imageList} />
             </div>
-            
-            
+
+
         </Layout>
     )
 }
