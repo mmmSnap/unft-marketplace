@@ -11,9 +11,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
-const PhotoGrapherAddress = ({ photoGrapherAddress }) => {
+const PhotoGrapherAddress = ({ photoGrapherAddress,form }) => {
 
-    return (<React.Fragment>
+    const {getValues} = form
+    const dateValue = getValues()
+    return (
+    <React.Fragment>
         <Typography variant="h6" gutterBottom>
            
         </Typography>
@@ -33,6 +36,18 @@ const PhotoGrapherAddress = ({ photoGrapherAddress }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                    <TableRow>
+                            <TableCell component="th" scope="row" width={'35%'}>
+                                {'Start Date'}
+                            </TableCell>
+                            <TableCell align="left">{dateValue.startDate}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row" width={'35%'}>
+                                {'End Date'}
+                            </TableCell>
+                            <TableCell align="left">{dateValue.endDate}</TableCell>
+                        </TableRow>
                         <TableRow>
                             <TableCell component="th" scope="row" width={'35%'}>
                                 {'Name'}

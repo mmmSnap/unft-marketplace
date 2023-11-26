@@ -26,7 +26,7 @@ import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/Mui
 import useMuiDateHook from '../../components/MuiComponent/MuiDateComponent/useMuiDateHook';
 import MuiBookingReviewForm from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingReviewForm';
 
-function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAddress) {
+function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAddress,form) {
   
  
   switch (step) {
@@ -34,13 +34,13 @@ function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAdd
       return (
         <>
         <MuiDateComponent fieldsForm={fieldsForm} />
-        {type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} /> : <MuiBookingForms ref={myRef} userAddress={userAddress} />}
+        {type === 'Studio Address' ? <PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress}  form={form}/> : <MuiBookingForms ref={myRef} userAddress={userAddress} />}
         </>
         );
     case 1:
      
        return(
-         type === 'Studio Address' ?<PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} />:<MuiBookingReviewForm userAddress={userAddress} />
+         type === 'Studio Address' ?<PhotoGrapherAddress photoGrapherAddress={photoGrapherAddress} form={form} />:<MuiBookingReviewForm userAddress={userAddress}  form={form}/>
        )
     case 2:
       return <BookingConfirm />;
@@ -73,7 +73,8 @@ export default function PhotograherBookingPage() {
       })
     }
   }, [photographerId])
-  const {fieldsForm} = useMuiDateHook(defaultDate)
+
+  const {fieldsForm,form} = useMuiDateHook(defaultDate)
 
    const submit = (data)=>{
        if(data){
@@ -137,7 +138,7 @@ export default function PhotograherBookingPage() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep, photoGrapherAddress, addressType,fieldsForm,myRef,userAddress)}
+              {getStepContent(activeStep, photoGrapherAddress, addressType,fieldsForm,myRef,userAddress,form)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
