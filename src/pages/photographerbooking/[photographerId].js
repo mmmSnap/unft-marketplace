@@ -24,6 +24,7 @@ import { useForm } from 'react-hook-form';
 const steps = ['Select or Enter Address Type', 'Review Booking details', 'Booking Confirmation Details'];
 import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent';
 import useMuiDateHook from '../../components/MuiComponent/MuiDateComponent/useMuiDateHook';
+import MuiBookingReviewForm from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingReviewForm';
 
 function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAddress) {
   
@@ -37,7 +38,7 @@ function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAdd
         </>
         );
     case 1:
-      return <ReviewDetails />;
+      return <MuiBookingReviewForm userAddress={userAddress} />;
     case 2:
       return <BookingConfirm />;
     default:
