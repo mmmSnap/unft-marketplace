@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import Layout from '../../components/Layout'
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -25,7 +26,7 @@ const steps = ['Select or Enter Address Type', 'Review Booking details', 'Bookin
 import MuiDateComponent from '../../components/MuiComponent/MuiDateComponent/MuiDateComponent';
 import useMuiDateHook from '../../components/MuiComponent/MuiDateComponent/useMuiDateHook';
 import MuiBookingReviewForm from '../../components/MuiComponent/MuiBookingDetailsPage/MuiBookingReviewForm';
-
+import axios from 'axios'
 function getStepContent(step, photoGrapherAddress, type,fieldsForm,myRef,userAddress,form) {
   
  
@@ -84,12 +85,41 @@ export default function PhotograherBookingPage() {
    }
   
   const handleNext = () => {
+    if(activeStep==1){
+      onSubmitBookingDetails()
+    }
     if(addressType==='Studio Address'){
       setActiveStep(activeStep + 1);
     }else{
       const handleSubmit = myRef.current.handleFormSubmit()
-   handleSubmit(submit)()
+       handleSubmit(submit)()
     }
+  };
+  const onSubmitBookingDetails = () => {
+     
+    const currentDateValue = form.getValues()
+    // setIsSubmit(true)
+    const payload = {
+      from: moment(currentDateValue.startDate).format("DD-MM-YYYY"),
+      to: moment(currentDateValue.endDate).format("DD-MM-YYYY"),
+      address: addressType==='Studio Address'?photoGrapherAddress:userAddress,
+      for: photoGrapherAddress.key,
+      bookingDate: new Date(),
+      addressType,
+      amount:'100'
+    };
+    axios({
+      method: "POST",
+      url: "/api/booking",
+      data: { ...payload },
+    })
+      .then((response) => {
+        console.log("success", response);
+        router.push(`/booking/review/${response.data.key}`)
+      })
+      .catch((e) => {
+        console.log("error", e);
+      });
   };
 
   const handleBack = () => {
