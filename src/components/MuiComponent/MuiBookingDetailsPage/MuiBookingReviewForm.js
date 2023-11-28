@@ -9,9 +9,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import moment from 'moment';
 
 
-const MuiBookingReviewForm = ({userAddress})=>{
+const MuiBookingReviewForm = ({userAddress,form})=>{
+    const {getValues} = form
+    const dateValue = getValues()
+    const startDate  = moment(dateValue.startDate)
+    const endDate = moment(dateValue.endDate)
 //   console.log(userAddress)
     return (
         <React.Fragment>
@@ -34,6 +39,24 @@ const MuiBookingReviewForm = ({userAddress})=>{
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                    <TableRow>
+                            <TableCell component="th" scope="row" width={'35%'}>
+                                {'Start Date'}
+                            </TableCell>
+                            <TableCell align="left">{moment(startDate).format('DD-MM-YYYY')}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row" width={'35%'}>
+                                {'End Date'}
+                            </TableCell>
+                            <TableCell align="left">{moment(endDate).format('DD-MM-YYYY')}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row" width={'35%'}>
+                                {'Number of booking days'}
+                            </TableCell>
+                            <TableCell align="left">{endDate.diff(startDate, 'days')+1}</TableCell>
+                        </TableRow>
                         <TableRow>
                             <TableCell component="th" scope="row" width={'35%'}>
                                 {'First Name'}
