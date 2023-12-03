@@ -19,14 +19,15 @@ export default function BasicDatePicker(props) {
           message: "This fields is required",
           
         },
-        pattern: {
-          value:/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-          message: "Invalid Date ",
+        // pattern: {
+        //   value:/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+        //   message: "Invalid Date ",
 
-        }
+        // }
       }}
       render={({ field, fieldState: { error } }) => {
         const {value} = field
+        
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
