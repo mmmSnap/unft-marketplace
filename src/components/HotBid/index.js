@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid } from '@mui/material'
+import { useRouter } from 'next/router'
 import cn from 'classnames'
 import Slider from 'react-slick'
 import Icon from '../Icon'
@@ -65,6 +66,20 @@ const Hot = ({ classSection, info }) => {
         setLoading(false)
       })
   }
+  const router = useRouter()
+  const handleBookPhotoGrapher = (key)=>{
+
+  
+
+  
+     router.push({
+      pathname: `/photographerbooking/${key}`,
+      query:{
+       startDate: new Date().toString() ,
+       endDate: new Date().toString(),
+      }
+     })
+   }
 
   React.useEffect(() => {
     getPhotGrapherDeatisl()
@@ -81,7 +96,7 @@ const Hot = ({ classSection, info }) => {
                 {photGapherList &&
                   photGapherList?.map((x, index) => (
                     <Grid item xs={4} md={4} key={index}>
-                      <MediaCard key={index} items={x} bookNowHandler={() => { }} />
+                      <MediaCard key={index} items={x} bookNowHandler={handleBookPhotoGrapher} />
                     </Grid>
                   ))}
               </Slider>}
