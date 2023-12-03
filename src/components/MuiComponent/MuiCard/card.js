@@ -44,7 +44,7 @@ export default function MediaCard({ name, items ,bookNowHandler}) {
     <Card key={image?.src}>
       <CardContent sx={{ padding: "0px" }}>
         <div style={{ cursor: "pointer" }} onClick={() => router.push(`/photographer-details/${items.key}`)}>
-          {!!image?.src && (<Image src={'https://cdn.discordapp.com/attachments/989739723151007764/1142453498508750868/mmojahid_mmm_text_logo_camera_mmm_text_at_bottom_white_backgrou_8759878f-0d1f-4ef2-a64c-8098313dbea8.png'}
+          {!!image?.src && (<Image src={image?.src||'https://cdn.discordapp.com/attachments/989739723151007764/1142453498508750868/mmojahid_mmm_text_logo_camera_mmm_text_at_bottom_white_backgrou_8759878f-0d1f-4ef2-a64c-8098313dbea8.png'}
             alt="Picture of the author"
             width={image?.width || 360}
             height={image?.height || 250}
