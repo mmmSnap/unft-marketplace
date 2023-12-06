@@ -182,6 +182,17 @@ const Discover = ({ info, type }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedMaxTerm, debouncedMinTerm])
 
+  const handleBookPhotoGrapher = (key)=>{
+
+    router.push({
+     pathname: `/photographerbooking/${key}`,
+     query:{
+      startDate: new Date().toString() ,
+      endDate: new Date().toString(),
+     }
+    })
+  }
+
   return (
     <div className={cn('section', styles.section)}>
       <div className={cn('container', styles.container)}>
@@ -235,7 +246,7 @@ const Discover = ({ info, type }) => {
             {photGapherList?.length ? (
               photGapherList?.map((info, index) => (
                 <Grid item xs={3} md={3} key={index} sx={{width:"260px",margin:"15px 13px"}}>
-                  <MediaCard key={index} items={info} bookNowHandler={() => { }} />
+                  <MediaCard key={index} items={info} bookNowHandler={handleBookPhotoGrapher} />
                 </Grid>
               ))
             ) : (
