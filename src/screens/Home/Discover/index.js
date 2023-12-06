@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Grid } from '@mui/material'
+// import { useRouter } from 'next/router'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import useFetchData from '../../../utils/hooks/useFetchData'
@@ -8,8 +9,6 @@ import handleQueryParams from '../../../utils/queryParams'
 import MuiChip from '../../../components/MuiComponent/MuiChip/MuiChip'
 import Slider from 'react-slick'
 import Icon from '../../../components/Icon'
-import Card from '../../../components/Card'
-import Dropdown from '../../../components/Dropdown'
 import priceRange from '../../../utils/constants/priceRange'
 import { OPTIONS } from '../../../utils/constants/appConstants'
 import MuiFilter from '../../../components/MuiComponent/MuiFilter/MuiFilter'
@@ -83,6 +82,8 @@ const Discover = ({ info, type }) => {
   const [photGapherList, setPhotoGrapherList] = React.useState([])
   const { data: filterResult, fetchData } = useFetchData([])
   const [chipList, setChipList] = React.useState(ChipItem)
+  const router = useRouter()
+
 
   React.useEffect(() => {
     getPhotoGrapherDetails()
