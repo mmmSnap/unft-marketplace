@@ -33,6 +33,7 @@ const MyBookingComponent = () => {
       })
       .catch((e) => {
         console.log();
+        setIsLoading(false)
       });
   }, []);
 
