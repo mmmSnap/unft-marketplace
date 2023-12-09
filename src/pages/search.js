@@ -136,6 +136,20 @@ const Search = ({ categoriesGroup, navigationItems, categoryData }) => {
 
   }, [])
 
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.",search);
+        event.preventDefault();
+        getPhotGrapherDeatisl()
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [search]);
+
  
 
   const handleBookPhotoGrapher = (key)=>{

@@ -35,7 +35,7 @@ const MuiFilter = ({ filterData }) => {
         >
             <Divider />
             <>
-                <Grid item md={12}>
+                <Grid item md={3}>
                     <SelectValueOnChange
                         size={"small"}
                         label="Gender"
