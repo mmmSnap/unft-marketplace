@@ -24,9 +24,9 @@ const MuiBookingForms = React.forwardRef(({ userAddress }, ref) => {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      {/* <Typography variant="h6" gutterBottom>
         Shipping address
-      </Typography>
+      </Typography> */}
       <FormProvider {...form}>
         <form >
           <Grid container spacing={3}>
