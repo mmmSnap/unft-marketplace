@@ -1,6 +1,7 @@
 import { axionInstace } from "./axionInstace"
+import axios from 'axios'
 export const getPhotoGrapherDetails = (query='A')=>{
-   return axionInstace.get(`/v1/search?query=${query}`)
+   return axios.get(`${process.env.BASE_URL}/v1/search?query=${query}`)
     .then((result) => {
        return result.data
      
@@ -10,7 +11,7 @@ export const getPhotoGrapherDetails = (query='A')=>{
 }
 
 export const getSinglePhotoGrapher = (key)=>{
-    return axionInstace.get(`/v1/photographer`,{
+    return axios.get(`${process.env.BASE_URL}/v1/photographer`,{
         params:key
     })
     .then((result) => {
