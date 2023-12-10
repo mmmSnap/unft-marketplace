@@ -22,8 +22,8 @@ import {
   INSTA_ID,
   STUDIO_NAME,
 } from "../consts/consts";
-import CountryCode from  '../../../../public/data/countryCode.json'
-import CountryList from '../../../../public/data/countryList.json'
+import CountryCode from  '../../../../public/data/twoCountryCode.json'
+import CountryList from '../../../../public/data/twoCountryList.json'
 import ToastAlert from "../../styledComponent/Alert/ToastAlert";
 
 const Gender = [{ label: "Male" }, { label: "Female" }];

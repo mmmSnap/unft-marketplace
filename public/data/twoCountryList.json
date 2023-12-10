@@ -1,0 +1,12 @@
+[
+    {
+        "label": "India",
+        "dial_code": "+91",
+        "code": "IN"
+    },
+    {
+        "label": "United Kingdom",
+        "dial_code": "+44",
+        "code": "GB"
+    }
+]
