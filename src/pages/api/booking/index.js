@@ -13,6 +13,12 @@ export default async function handler(req, res) {
     const bookings_database = deta.Base(process.env.BOOKINGS_TABLE_NAME);
 
     let session = await getServerSession(req, res, authOptions);
+
+    if (!session || !session.user || !session.user.email) {
+        res.status(401).json({"session": session})
+        return
+    }
+
     const users_database = deta.Base(process.env.USERS_TABLE_NAME);
     let user = (await users_database.fetch({email: session.user.email})).items[0];
 
