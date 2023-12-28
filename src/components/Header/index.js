@@ -11,6 +11,7 @@ import {getToken} from '../../utils/token'
 import {navbarMenuItems} from './consts/headerConst'
 import styles from './Header.module.sass'
 import {signIn, signOut, useSession} from "next-auth/react";
+import axios from 'axios'
 
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false)
@@ -45,6 +46,13 @@ const Headers = () => {
   }, [cosmicUser, setCosmicUser])
 
   const { data: session } = useSession();
+
+  if (session?.user?.email) {
+    console.log("User is logged in so calling user api");
+    console.log("Here is the response -> ", axios.get("api/user").then((res) => console.log(res.data)));
+  } else {
+    console.log("User is not logged in so not calling user api");
+  }
 
   return (
     <>
