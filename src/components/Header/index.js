@@ -49,9 +49,16 @@ const Headers = () => {
 
   if (session?.user?.email) {
     console.log("User is logged in so calling user api");
-    console.log("Here is the response -> ", axios.get("api/user").then((res) => console.log(res.data)));
+    axios.get("api/user").then((res) => console.log("Here is the user api response -> ", res.data));
   } else {
     console.log("User is not logged in so not calling user api");
+  }
+
+  if (session?.user?.email) {
+    console.log("User is logged in so calling booking api");
+    axios.get("api/booking").then((res) => console.log("Here is the booking api response -> ", res.data));
+  } else {
+    console.log("User is not logged in so not calling booking api");
   }
 
   return (

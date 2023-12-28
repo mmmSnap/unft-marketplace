@@ -14,8 +14,8 @@ export default async function handler(req, res) {
 
     let session = await getServerSession(req, res, authOptions);
 
-    if (!session || !session.user || !session.user.email) {
-        res.status(401).json({"session": session})
+    if (!session?.user?.email) {
+        res.status(401).json({})
         return
     }
 
